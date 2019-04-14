@@ -1,0 +1,1 @@
+/*export const NEW_VARIABLE = 'user/new_variable';*/
