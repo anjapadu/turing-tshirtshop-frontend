@@ -11,6 +11,8 @@ import { } from '../actions';
 import { push } from 'connected-react-router';
 import {
     Home,
+    Login,
+    Register,
 } from './asyncRoutes';
 import { appSelector } from '../selectors';
 
@@ -24,6 +26,16 @@ class RouterApp extends React.Component {
                     path={"/"}
 
                     component={() => <Home />}
+                    exact
+                />
+                <Route
+                    path={"/login"}
+                    component={() => <Login />}
+                    exact
+                />
+                <Route
+                    path={"/register"}
+                    component={() => <Register />}
                     exact
                 />
             </Switch>
