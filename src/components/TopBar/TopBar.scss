@@ -1,0 +1,32 @@
+.is-secondary-nav{
+    letter-spacing: 0.05rem;
+    min-height:3rem default !important;
+    background: $darkpink;
+    height: 3rem;
+    font-family: 'Montserrat';
+    font-weight: bold;
+    color: $white;
+    font-size: 15px;
+    @include until($desktop) {
+       font-size: 12px;
+      }
+    line-height: 150%;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0.75rem;
+}
+
+.navbar-item{
+    font-family: 'Montserrat';
+    font-weight: bold;
+    font-size: 15px;
+    color: $black;
+    line-height: 150%;
+}
+.navbar-brand{
+    .navbar-item{
+        font-size: 26px;
+        color: $black;
+        letter-spacing: .25rem;
+    }
+}

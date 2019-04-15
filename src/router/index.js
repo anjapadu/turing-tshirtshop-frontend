@@ -15,6 +15,8 @@ import {
     Register,
 } from './asyncRoutes';
 import { appSelector } from '../selectors';
+import TopBar from '../components/TopBar';
+import Loader from '../components/Loader';
 
 class RouterApp extends React.Component {
     render() {
@@ -39,14 +41,30 @@ class RouterApp extends React.Component {
                     exact
                 />
             </Switch>
+
+
         </Layout >)
     }
 }
 
 export const Layout = withRouter((props) => {
-    return (<div>
-        {props.children}
-    </div >)
+    return (<React.Fragment>
+        <TopBar
+            push={props.push}
+        />
+        <div
+            className={'route-container'}
+            style={{
+                flex: 1,
+                flexDirection: 'column',
+                height: '100%',
+                display: 'flex',
+                alignItems: 'flex-start'
+            }}
+        >
+            {props.children}
+        </div>
+    </React.Fragment >)
 })
 
 const mapStateToProps = (state) => {

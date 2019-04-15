@@ -1,0 +1,12 @@
+.is-responsive-reverse{
+    .button:not(:last-child){
+        margin-right: 10px;
+    }
+    @include until($desktop) {
+        .button:not(:last-child){
+            margin-right: 0px;
+            margin-top: 10px;
+        }
+        flex-direction: column-reverse;
+    }
+}

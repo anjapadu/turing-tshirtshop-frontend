@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:700|Open+Sans|Playfair+Display:700');
+
+$black : #2E2E2E;
+$darkgray: #6C6C6C;
+$lightgray: #B4B4B4;
+$darkpink: #F62F5E;
+$white: #FFF;
+$form-gray: #e0e0e0;
+
+$blue : #6EB2FB;
+$orange: #F1AD3D;
+$lightergray: #F7F7F7;
+$green: #00D3CA;
+$lightgreen: #EFFC90;
+
+
+$navbar-item-color: $black;
+$navbar-height:5rem;
+
+@import "bulma";
+
+@import "bulma-pageloader/dist/css/bulma-pageloader.sass";
+
+body,html{
+    background: $white;
+    height: 100%;
+    margin: 0;
+}
+#app{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+h1{
+    font-family: 'Playfair' !important;
+    font-weight: bold;
+    font-size: 48px;
+    color: $black;
+    line-height: 150%;
+}
+
+h2{
+    font-family: 'Montserrat' !important;
+    font-weight: bold;
+    font-size: 24px;
+    color: $black;
+    line-height: 150%;
+}  
+
+h3{
+    font-family: 'Montserrat' !important;
+    font-weight: bold;
+    font-size: 16px;
+    color: $black;
+    line-height: 150%;
+    @include until($desktop) {
+        font-size: 13px;
+    }
+}
+.pageloader{
+    position: relative !important;
+    flex: 1;
+
+}
+.is-50-percent{
+    width: 50%;
+}
+.is-right{
+    display: flex;
+    flex: 1 1;
+    justify-content: flex-end;    
+}
+
+.route-container{
+    @include until($desktop) {
+        // padding: 10px;  
+       }
+}
+
+@import "components/TopBar/TopBar.scss";
+@import "components/Button/Button.scss";
+@import "components/Input/Input.scss";
+@import "components/Form/Form.scss";
+@import "components/Col/Col.scss";
+
+@import "bulma/sass/elements/form.sass";
