@@ -1,14 +1,26 @@
 import React, { PureComponent } from 'react';
-
+import img from '../../images/tshirtshop.png';
+import Icon from '../Icon';
 
 export default (props) => {
     return <React.Fragment>
-        <nav className="navbar is-black" role="navigation" aria-label="main navigation">
+        <nav className="navbar is-white" role="navigation" aria-label="main navigation">
             <div className="navbar-brand">
-                <a className="navbar-item" >
-                    {/* <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: Free, open source, & modern CSS framework based on Flexbox" width="112" height="28" /> */}
-                    TSHIRT SHOP
-            </a>
+                <a className="navbar-item"
+                    style={{
+                        paddingTop: 0,
+                        paddingBottom: 0
+                    }}
+                >
+                    <img
+                        src={img}
+                        alt="Bulma: Free, open source, & modern CSS framework based on Flexbox" height={'100%'}
+                        style={{
+                            maxHeight: 'unset'
+                        }}
+                    />
+                    {/* <img /> */}
+                </a>
                 <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
@@ -29,14 +41,14 @@ export default (props) => {
                     />
                 </div>
 
-                {/* <div className="navbar-end">
-                    <a className="navbar-item">
-                        Login
-</a>
-                    <a className="navbar-item">
-                        Register
-</a>
-                </div> */}
+                <div className="navbar-end">
+                    <TopBarItem>
+                        <Icon
+                            size={'is-large fa-2x'}
+                            icon={"fa-shopping-cart"}
+                        />
+                    </TopBarItem>
+                </div>
             </div>
         </nav>
 
@@ -60,8 +72,8 @@ export default (props) => {
     </React.Fragment>
 }
 
-const TopBarItem = ({ text, route, onClick }) => (<a
+const TopBarItem = ({ text, children, route, onClick }) => (<a
     className="navbar-item"
 >
-    {text}
+    {text || children}
 </a>)

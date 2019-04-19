@@ -5,14 +5,15 @@ import {
 /*
 const getStateVariable = state => state.products.stateVariable;
 */
+const getProducts = state => state.products.productList;
 
 const productsSelector = createSelector(
-    [/*getStateVariable*/],
-    (/*stateVariable*/) => ({
-        /*stateVariable*/
+    [getProducts],
+    (productList) => ({
+        productList
     })
 );
-    
+
 export {
     productsSelector
 }

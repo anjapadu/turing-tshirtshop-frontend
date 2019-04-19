@@ -8,6 +8,7 @@ module.exports = [
     new WebpackBar(),
     new DefinePlugin({
         'IS_DEV': JSON.stringify("true"),
+        'GRAPH_API_URL': JSON.stringify("http://localhost:3035/api")
     }),
     new BundleAnalyzerPlugin(),
     new HtmlWebPackPlugin({

@@ -36,6 +36,7 @@
     "babel-jest": "^24.7.1",
     "babel-loader": "^8.0.5",
     "babel-plugin-istanbul": "^5.1.1",
+    "babel-plugin-module-resolver": "^3.2.0",
     "babel-polyfill": "^6.26.0",
     "compression-webpack-plugin": "^2.0.0",
     "css-loader": "^2.1.1",

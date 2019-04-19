@@ -1,0 +1,4 @@
+.is-divider[data-content]::after,
+.is-divider-vertical[data-content]::after {
+  background: $white;
+}

@@ -1,0 +1,43 @@
+.color-picker {
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  .color-item {
+    cursor: pointer;
+    border-radius: 100%;
+    margin: 0.25rem 0.5rem;
+    transform: scale(1.2);
+   
+    &.selected {
+      box-shadow: 0px 0px 0px 1px $lightgray;
+    }
+  }
+  .white {
+    color: white;
+  }
+  .black {
+    color: black;
+  }
+  .red {
+    color: red;
+  }
+  .orange {
+    color: orange;
+  }
+  .yellow {
+    color: yellow;
+  }
+  .green {
+    color: green;
+  }
+  .blue {
+    color: blue;
+  }
+  .indigo {
+    color: indigo;
+  }
+  .purple {
+    color: purple;
+  }
+}

@@ -1,9 +1,9 @@
-.button{
-    font-family: 'Montserrat';
-    font-weight: bold;
-    font-size: 15px;
-    letter-spacing: 2px;
-    @include until($desktop) {
-        align-self: stretch;
-    }
+.button {
+  font-family: "Montserrat";
+  font-weight: bold;
+  font-size: 15px;
+  letter-spacing: 2px;
+  @include until($desktop) {
+    align-self: stretch;
+  }
 }

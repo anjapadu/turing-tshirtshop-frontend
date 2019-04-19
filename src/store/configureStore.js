@@ -8,20 +8,18 @@ import { routerMiddleware } from 'connected-react-router';
 
 import { composeWithDevTools } from "redux-devtools-extension";
 
-
 const persistConfig = {
     key: 'root',
     storage,
     blacklist: [
-        "router"
+        "router",
+        "app"
     ]
 }
 export const history = createBrowserHistory();
 // const routerMwre = routerMiddleware(history);
 const sagaMiddleware = createSagaMiddleware();
 const persistedReducer = persistReducer(persistConfig, reducers(history))
-
-
 
 export default () => {
     let store = createStore(

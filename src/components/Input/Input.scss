@@ -1,33 +1,29 @@
-
 $control-border-width: 2px;
 $input-border-color: transparent;
 $input-shadow: none;
 $input-focus-border-color: none;
 
-.field{
-    // transform: scale(1);
-    // padding: 40px;
-    
-    border-radius: $radius;
-    box-shadow: 1.5px 1.5px 2px 0px $lightgray;
-    &:focus-within{
-            box-shadow: 1.5px 1.5px 2px 0px #6EB2FB;
+.field {
+  border-radius: $radius;
+  box-shadow: 1.5px 1.5px 2px 0px $lightgray;
+  &:focus-within {
+    box-shadow: 1.5px 1.5px 2px 0px #6eb2fb;
+  }
+  input {
+    // &:focus{
+
+    // }
+    font-family: "Open Sans" !important;
+    height: 3em;
+    // transform: scale(2)
+    &.is-center {
+      text-align: center !important;
     }
-    input{
-        // &:focus{
-            
-        // }
-        font-family: 'Open Sans' !important;
-        height: 3em;
-        // transform: scale(2)
-        &.is-center{
-            text-align: center !important;
-        }
-    }
-    .icon{
-        height: 3em !important;
-    }
-    @include until($desktop) {
-        align-self: stretch;
-       }
+  }
+  .icon {
+    height: 3em !important;
+  }
+  @include until($desktop) {
+    align-self: stretch;
+  }
 }

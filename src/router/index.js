@@ -26,7 +26,6 @@ class RouterApp extends React.Component {
             <Switch>
                 <Route
                     path={"/"}
-
                     component={() => <Home />}
                     exact
                 />

@@ -1,0 +1,41 @@
+import React, { PureComponent } from 'react';
+import Icon from '../Icon';
+
+class ColorPicker extends PureComponent {
+    constructor(props) {
+        super(props);
+        this.colors = this.props.colors.split(',');
+        this.state = {
+            selected: this.colors[0]
+        }
+    }
+    _onPickColor(selected) {
+        this.setState({
+            selected
+        })
+    }
+    _renderColors() {
+        const { selected } = this.state;
+        return (this.colors).map((color, index) => {
+            return <div
+                key={`_${index}`}
+                onClick={this._onPickColor.bind(this, color)}
+                className={`color-item${selected === color ? ' selected' : ''}`}
+            >
+                <Icon
+                    icon={`fa-circle ${color.toLowerCase()}`}
+                />
+            </div>
+        })
+    }
+    render() {
+        return <div
+            style={this.props.style || {}}
+            className={"color-picker"}
+        >
+            {this._renderColors()}
+        </div>
+    }
+}
+
+export default ColorPicker;

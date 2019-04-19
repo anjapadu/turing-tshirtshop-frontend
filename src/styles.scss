@@ -1,86 +1,101 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:700|Open+Sans|Playfair+Display:700');
+@import url("https://fonts.googleapis.com/css?family=Montserrat:700|Open+Sans|Playfair+Display:700");
 
-$black : #2E2E2E;
-$darkgray: #6C6C6C;
-$lightgray: #B4B4B4;
-$darkpink: #F62F5E;
-$white: #FFF;
+$black: #2e2e2e;
+$darkgray: #6c6c6c;
+$lightgray: #b4b4b4;
+$darkpink: #f62f5e;
+$white: #fff;
 $form-gray: #e0e0e0;
 
-$blue : #6EB2FB;
-$orange: #F1AD3D;
-$lightergray: #F7F7F7;
-$green: #00D3CA;
-$lightgreen: #EFFC90;
-
+$blue: #6eb2fb;
+$orange: #f1ad3d;
+$lightergray: #f7f7f7;
+$green: #00d3ca;
+$lightgreen: #effc90;
 
 $navbar-item-color: $black;
-$navbar-height:5rem;
+$navbar-height: 5rem;
 
 @import "bulma";
 
 @import "bulma-pageloader/dist/css/bulma-pageloader.sass";
+@import "bulma-divider/dist/css/bulma-divider.sass";
 
-body,html{
-    background: $white;
-    height: 100%;
-    margin: 0;
+body,
+html {
+  background: $lightergray;
+  height: 100%;
+  margin: 0;
 }
-#app{
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+#app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
-h1{
-    font-family: 'Playfair' !important;
-    font-weight: bold;
-    font-size: 48px;
-    color: $black;
-    line-height: 150%;
-}
-
-h2{
-    font-family: 'Montserrat' !important;
-    font-weight: bold;
-    font-size: 24px;
-    color: $black;
-    line-height: 150%;
-}  
-
-h3{
-    font-family: 'Montserrat' !important;
-    font-weight: bold;
-    font-size: 16px;
-    color: $black;
-    line-height: 150%;
-    @include until($desktop) {
-        font-size: 13px;
-    }
-}
-.pageloader{
-    position: relative !important;
-    flex: 1;
-
-}
-.is-50-percent{
-    width: 50%;
-}
-.is-right{
-    display: flex;
-    flex: 1 1;
-    justify-content: flex-end;    
+h1 {
+  font-family: "Playfair" !important;
+  font-weight: bold;
+  font-size: 48px;
+  color: $black;
+  line-height: 150%;
 }
 
-.route-container{
-    @include until($desktop) {
-        // padding: 10px;  
-       }
+h2 {
+  font-family: "Montserrat" !important;
+  font-weight: bold;
+  font-size: 24px;
+  color: $black;
+  line-height: 150%;
 }
+
+h3 {
+  font-family: "Montserrat" !important;
+  font-weight: bold;
+  font-size: 16px;
+  color: $black;
+  line-height: 150%;
+  @include until($desktop) {
+    font-size: 13px;
+  }
+}
+.pageloader {
+  position: relative !important;
+  flex: 1;
+}
+.is-50-percent {
+  width: 50%;
+}
+.is-right {
+  display: flex;
+  flex: 1 1;
+  justify-content: flex-end;
+}
+
+.is-flex-column{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.route-container {
+  @include until($desktop) {
+    // padding: 10px;
+  }
+}
+
+@import "containers/Home//Home.scss"; 
 
 @import "components/TopBar/TopBar.scss";
 @import "components/Button/Button.scss";
 @import "components/Input/Input.scss";
 @import "components/Form/Form.scss";
 @import "components/Col/Col.scss";
+@import "components/Card/Card.scss";
+@import "components/SideMenu/SideMenu.scss";
+@import "components/Divider/Divider.scss";
+@import "components/ColorPicker/ColorPicker.scss";
+@import "components/Select/Select.scss";
 
+@import "bulma/sass/components/Card.sass";
 @import "bulma/sass/elements/form.sass";

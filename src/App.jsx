@@ -6,6 +6,7 @@ import {
 	PersistGate
 } from 'redux-persist/integration/react'
 import './styles.scss';
+import './utils'
 import configureStore from './store';
 import { ConnectedRouter } from 'connected-react-router'
 const {
@@ -14,9 +15,9 @@ const {
 	sagaMiddleware,
 	history
 } = configureStore();
+
 import watcherSaga from './sagas'
 import RouterApp from './router';
-import './utils'
 import { hot } from 'react-hot-loader/root'
 
 class App extends Component {

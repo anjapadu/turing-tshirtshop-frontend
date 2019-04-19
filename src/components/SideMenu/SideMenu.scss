@@ -1,0 +1,46 @@
+.left-menu {
+  //   background: $lightgray;
+  padding: 1rem;
+  background: $white;
+  border-radius: $radius;
+  box-shadow: 2px 2px 6px 0px $lightgray;
+  margin: 2rem;
+  input {
+    border: solid 1px #f7f7f7;
+  }
+  ul {
+    li {
+      border-radius: $radius;
+      text-align: center;
+      padding: 1rem;
+      background: $blue;
+      cursor: pointer;
+      margin-top: 10px;
+      font-family: "Montserrat";
+      &:hover {
+        background: $darkpink;
+      }
+      &.is-selected {
+        background: $darkpink;
+      }
+      &.is-category {
+        background: none;
+        border: solid 2px $darkpink;
+        a {
+          color: $darkpink !important;
+        }
+        &.is-selected {
+          background: $darkpink;
+          a {
+            color: $white !important;
+          }
+        }
+      }
+
+      a {
+        color: $white !important;
+        text-decoration: none;
+      }
+    }
+  }
+}
