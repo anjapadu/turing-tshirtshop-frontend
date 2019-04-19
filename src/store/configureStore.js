@@ -7,6 +7,7 @@ import reducers from '../reducers';
 import { routerMiddleware } from 'connected-react-router';
 
 import { composeWithDevTools } from "redux-devtools-extension";
+import { SET_SELECTED_PAGE } from '../constants';
 
 const persistConfig = {
     key: 'root',
@@ -42,6 +43,11 @@ export default () => {
             )
         )
     )
-    let persistor = persistStore(store)
+    let persistor = persistStore(store, null, () => {
+        store.dispatch({
+            type: SET_SELECTED_PAGE,
+            payload: 1
+        })
+    })
     return { store, persistor, sagaMiddleware, history }
 };

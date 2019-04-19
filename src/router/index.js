@@ -40,8 +40,6 @@ class RouterApp extends React.Component {
                     exact
                 />
             </Switch>
-
-
         </Layout >)
     }
 }
@@ -61,17 +59,17 @@ export const Layout = withRouter((props) => {
                 alignItems: 'flex-start'
             }}
         >
-            {props.children}
+            {props.isLoading ? <Loader /> : props.children}
         </div>
     </React.Fragment >)
 })
 
 const mapStateToProps = (state) => {
     const {
-
+        isLoading
     } = appSelector(state);
     return {
-
+        isLoading
     }
 }
 

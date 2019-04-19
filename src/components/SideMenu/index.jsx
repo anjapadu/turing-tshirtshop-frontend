@@ -10,10 +10,16 @@ import {
 
 class SideMenu extends React.PureComponent {
     _onSelectDepartment(id, index) {
-        this.props.setDepartment({ id, index })
+        const { selectedDepartment } = this.props;
+        if (!selectedDepartment || selectedDepartment.id != id)
+            return this.props.setDepartment({ id, index })
+        this.props.setDepartment(null)
     }
     _onSelectCategory(id, index) {
-        this.props.setCategory({ id, index })
+        const { selectedCategory } = this.props;
+        if (!selectedCategory || selectedCategory.id != id)
+            return this.props.setCategory({ id, index })
+        this.props.setCategory(null)
     }
     _renderDepartments() {
         const { selectedDepartment, departmentsCategories } = this.props;
@@ -54,6 +60,9 @@ class SideMenu extends React.PureComponent {
             <Input
                 icon={"fa-search"}
                 placeholder={"Search a product"}
+            />
+            <Divider
+                content={"Pick a department"}
             />
             <ul>
                 {this._renderDepartments()}

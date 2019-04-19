@@ -6,10 +6,12 @@ import {
 } from 'redux-saga/effects';
 import {
     FETCH_DEPARTMENTS_CATEGORIES,
-    SET_DEPARTMENTS_CATEGORIES
+    SET_DEPARTMENTS_CATEGORIES,
+    SET_IS_LOADING
 } from '../constants/app';
 import { api } from '../apis';
 import { isCorrect } from '@utils';
+import { callFetchProducts } from './products'
 
 function* getDepartmentsCategories() {
     try {
@@ -39,7 +41,16 @@ function* getDepartmentsCategories() {
     }
 }
 
+function* loadInitial() {
+    yield call(callFetchProducts);
+    yield call(getDepartmentsCategories)
+    yield put({
+        type: SET_IS_LOADING,
+        payload: false
+    })
+}
+
 export default [
-    fork(getDepartmentsCategories),
+    fork(loadInitial),
     takeLatest(FETCH_DEPARTMENTS_CATEGORIES, getDepartmentsCategories)
 ];

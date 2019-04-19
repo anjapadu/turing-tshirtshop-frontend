@@ -59,8 +59,12 @@ h3 {
   }
 }
 .pageloader {
+  // &.pageloader-relative {
   position: relative !important;
-  flex: 1;
+  flex: 1 1;
+  height: 100%;
+  width: 100%;
+  // }
 }
 .is-50-percent {
   width: 50%;
@@ -71,7 +75,7 @@ h3 {
   justify-content: flex-end;
 }
 
-.is-flex-column{
+.is-flex-column {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -84,7 +88,7 @@ h3 {
   }
 }
 
-@import "containers/Home//Home.scss"; 
+@import "containers/Home//Home.scss";
 
 @import "components/TopBar/TopBar.scss";
 @import "components/Button/Button.scss";
@@ -96,6 +100,9 @@ h3 {
 @import "components/Divider/Divider.scss";
 @import "components/ColorPicker/ColorPicker.scss";
 @import "components/Select/Select.scss";
+@import "components/Row/Row.scss";
+@import "components/Pagination/Pagination.scss";
 
 @import "bulma/sass/components/Card.sass";
 @import "bulma/sass/elements/form.sass";
+@import "bulma/sass/components/Pagination.sass";

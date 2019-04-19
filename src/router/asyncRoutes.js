@@ -3,7 +3,7 @@ import Loadable from 'react-loadable';
 
 const withLoader = (loader) => ({
     ...loader,
-    loading: () => <div className="pageloader is-active is-dark"><span className="title">Cargando...</span></div>
+    loading: () => <div className="pageloader is-active is-dark"><span className="title">Loading...</span></div>
 })
 
 export const Home = Loadable(

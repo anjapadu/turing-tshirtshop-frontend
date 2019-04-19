@@ -1,7 +1,16 @@
 .home-container {
   display: flex;
+  // background: $lightgreen;
+  margin-top: 2rem;
+  min-height: 70vh;
   flex-direction: row;
   flex-wrap: wrap;
-  padding: 2rem 0rem;
-    
+  padding: 0rem 0rem 2rem 0rem;
+  border-radius: $radius;
+  justify-content: center;
+  .products-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 }

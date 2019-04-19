@@ -3,7 +3,7 @@ import img from '../../images/tshirtshop.png';
 import Icon from '../Icon';
 
 export default (props) => {
-    return <React.Fragment>
+    return <div>
         <nav className="navbar is-white" role="navigation" aria-label="main navigation">
             <div className="navbar-brand">
                 <a className="navbar-item"
@@ -69,7 +69,7 @@ export default (props) => {
             </div>
         </nav>
 
-    </React.Fragment>
+    </div>
 }
 
 const TopBarItem = ({ text, children, route, onClick }) => (<a

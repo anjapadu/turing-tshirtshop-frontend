@@ -17,12 +17,16 @@ class Button extends PureComponent {
     render() {
         return <a
             onClick={this._onClick.bind(this)}
-            className={`button${this.props.isLarge ? ' is-large' : ''}${this.renderColor()}${this.props.className ? ` ${this.props.className}` : ''}`}
+            className={`
+            button
+            ${this.props.isLarge ? ' is-large' : ''}
+            ${this.renderColor()}
+            ${this.props.className ? ` ${this.props.className}` : ''}`}
             style={{
                 width: this.props.isFluid ? '100%' : null,
                 ...(this.props.style || {})
             }}
-        >{this.props.text}</a>
+        >{this.props.children || this.props.text}</a>
     }
 }
 

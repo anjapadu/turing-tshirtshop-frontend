@@ -1,0 +1,17 @@
+$pagination-border-color: $red;
+$pagination-color: $red;
+$pagination-current-background-color: $red;
+$pagination-current-border-color: $red;
+$pagination-focus-color: $white;
+$pagination-focus-border-color: $red;
+$pagination-hover-border-color: $red;
+$pagination-hover-color: $red;
+.pagination {
+  .pagination-list {
+    .pagination-link {
+      &:first-child {
+        margin-left: 0px !important;
+      }
+    }
+  }
+}

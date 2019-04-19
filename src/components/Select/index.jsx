@@ -14,7 +14,6 @@ class Select extends PureComponent {
     render() {
         return <div className="select is-rounded">
             <select>
-                <option>{this.props.placeholder || 'Pick an option'}</option>
                 {this._renderOptions()}
             </select>
         </div>

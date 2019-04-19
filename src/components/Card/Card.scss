@@ -3,6 +3,9 @@ $card-shadow: none;
   position: relative;
   transition: all 0.2s ease;
   margin: 0px 20px 30px;
+  .title {
+    font-family: "Montserrat";
+  }
   .card-backface {
     // display: none;
     visibility: hidden;
@@ -56,10 +59,13 @@ $card-shadow: none;
       .title {
         font-family: "Montserrat";
       }
-      .discounted-price {
+      .price {
         font-family: "Montserrat";
-        // font-size:
         color: $darkpink;
+        &.disabled {
+          color: $lightgray;
+          text-decoration-line: line-through;
+        }
       }
     }
     @include until($desktop) {
