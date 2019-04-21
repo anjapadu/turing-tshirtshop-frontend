@@ -1,0 +1,33 @@
+.quantity-picker {
+  display: flex;
+  flex-direction: row;
+  ._button {
+    background: $lightergray;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &.disabled {
+      color: $lightgray;
+    }
+    &:hover {
+      &:not(.disabled) {
+        background: $red;
+        cursor: pointer;
+        color: $white;
+      }
+    }
+  }
+  input {
+    border-radius: 2.75rem;
+    margin: 0px 10px;
+    width: 5.5rem;
+    box-shadow: none;
+    text-align: center;
+    font-family: "Montserrat";
+    font-size: 1rem;
+    border: solid 2px $lightergray;
+  }
+}

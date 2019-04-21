@@ -1,9 +1,13 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
 import Button from '../Button';
 import ColorPicker from '../ColorPicker';
 import Select from '../Select';
-import Modal from '../Modal';
-
+import {
+    addProductToCart,
+    setProductDetail
+} from '../../actions'
 
 const BackFace = ({ children }) => {
     return (<div
@@ -53,7 +57,7 @@ class ProductCard extends PureComponent {
         const { selected: selectedColor } = this._colorPicker.state;
         const { selectedSize } = this.state;
         const { id } = this.props.product;
-        this.props.onClickAdd({
+        this.props.addProductToCart({
             ...this.props.product,
             productKey: `${id}_${selectedColor}_${selectedSize}`,
             selectedColor,
@@ -65,7 +69,12 @@ class ProductCard extends PureComponent {
             selectedSize
         })
     }
-
+    _onViewDetails() {
+        this.props.setProductDetail({
+            ...this.props.product
+        })
+        this.props.push(`/product/${this.props.product.id}`)
+    }
     render() {
         const {
             product: {
@@ -139,25 +148,21 @@ class ProductCard extends PureComponent {
                         className={"is-danger is-rounded is-outlined"}
                     />
                     <Button
+                        onClick={this._onViewDetails.bind(this)}
                         style={{
                             marginLeft: 10
                         }}
-                        text={"..."}
+                        text={"More"}
                         className={"is-danger is-rounded"}
-                    >
-                        <span className="icon is-small">
-                            <i className="fas fa-ellipsis-h"></i>
-                        </span>
-                    </Button>
+                    />
                 </div>
-
             </BackFace>
-            {/* <Modal
-                error
-                message={"You should select color and type"}
-            /> */}
         </div>)
     }
 }
 
-export default ProductCard;
+export default connect(undefined, {
+    addProductToCart,
+    setProductDetail,
+    push
+})(ProductCard);

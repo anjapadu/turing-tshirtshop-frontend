@@ -17,11 +17,15 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
     setShowCart
-})(({ subTotalCart, setShowCart }) => {
+})(({ subTotalCart, setShowCart, push }) => {
     return <div>
         <nav className="navbar is-white" role="navigation" aria-label="main navigation">
-            <div className="navbar-brand">
-                <a className="navbar-item"
+            <div
+                className="navbar-brand"
+                onClick={() => push('/')}
+            >
+                <a
+                    className="navbar-item"
                     style={{
                         paddingTop: 0,
                         paddingBottom: 0
@@ -74,9 +78,9 @@ export default connect(mapStateToProps, {
                 className={"is-50-percent"}
             >
                 Hi,&nbsp;<a
-                    onClick={() => props.push('/login')}
+                    onClick={() => push('/login')}
                 >Sign in</a>&nbsp;or&nbsp;<a
-                    onClick={() => props.push('/register')}
+                    onClick={() => push('/register')}
                 >Register</a>
             </div>
             <div

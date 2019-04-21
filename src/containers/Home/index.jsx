@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
 import ProductCard from '../../components/ProductCard';
 import SideMenu from '../../components/SideMenu';
 import Row from '../../components/Row';
@@ -7,21 +8,15 @@ import Col from '../../components/Col';
 import { productsSelector } from '../../selectors/products';
 import {
     fetchProductPage,
-    addProductToCart
 } from '../../actions'
 import Loader from '../../components/Loader';
 import Pagination from '../../components/Pagination';
 
 class Home extends PureComponent {
-    _onAddProduct(product) {
-        this.props.addProductToCart({
-            ...product,
-        });
-    }
+
     _renderProducts() {
         return this.props.productList.map((product, index) => {
             return <ProductCard
-                onClickAdd={this._onAddProduct.bind(this)}
                 key={`_${index}`}
                 product={product}
             />
@@ -80,11 +75,12 @@ const mapStateToProps = state => {
         isLoadingProducts,
         productList,
         productsCount,
-        selectedPage
+        selectedPage,
+
     }
 }
 
 export default connect(mapStateToProps, {
     fetchProductPage,
-    addProductToCart
+    push
 })(Home);

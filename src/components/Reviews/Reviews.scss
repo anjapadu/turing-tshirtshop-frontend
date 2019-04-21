@@ -1,0 +1,11 @@
+.reviews-container {
+  display: flex;
+  .reviews {
+    flex: 1;
+    padding: 2rem;
+  }
+  .review-form {
+    flex: 1;
+    padding: 2rem;
+  }
+}

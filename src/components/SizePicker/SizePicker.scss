@@ -1,0 +1,19 @@
+.size-picker {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  .size-item {
+    width: 4.5rem;
+    margin-right: 10px;
+    padding: 0.5rem 1rem;
+    background: $lightergray;
+    color: $black;
+    font-family: "Montserrat";
+    text-align: center;
+    cursor: pointer;
+    &.selected {
+      background: $red;
+      color: $white;
+    }
+  }
+}

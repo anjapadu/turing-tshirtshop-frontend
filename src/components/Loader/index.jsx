@@ -11,7 +11,8 @@ export default ({ style = {}, isPartialLoader = false }) => {
                 width: '100%',
                 justifyContent: 'center',
                 alignItems: 'center',
-                flexDirection: 'column'
+                flexDirection: 'column',
+                ...style
             }}
         >
             <img

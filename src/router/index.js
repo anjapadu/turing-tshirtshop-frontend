@@ -13,6 +13,7 @@ import {
     Home,
     Login,
     Register,
+    ProductDetail,
 } from './asyncRoutes';
 import { appSelector } from '../selectors';
 import TopBar from '../components/TopBar';
@@ -27,17 +28,22 @@ class RouterApp extends React.Component {
             <Switch>
                 <Route
                     path={"/"}
-                    component={() => <Home />}
+                    component={Home}
                     exact
                 />
                 <Route
                     path={"/login"}
-                    component={() => <Login />}
+                    component={Login}
                     exact
                 />
                 <Route
                     path={"/register"}
-                    component={() => <Register />}
+                    component={Register}
+                    exact
+                />
+                <Route
+                    path={"/product/:id"}
+                    component={ProductDetail}
                     exact
                 />
             </Switch>

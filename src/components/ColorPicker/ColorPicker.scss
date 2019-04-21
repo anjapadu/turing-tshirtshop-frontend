@@ -8,13 +8,15 @@
     border-radius: 100%;
     margin: 0.25rem 0.5rem;
     transform: scale(1.2);
-   
+
     &.selected {
       box-shadow: 0px 0px 0px 1px $lightgray;
     }
   }
   .white {
     color: white;
+    box-shadow: 0px 0px 0px 1px $lightergray;
+    border-radius: 100%;
   }
   .black {
     color: black;

@@ -14,7 +14,8 @@ const persistConfig = {
     storage,
     blacklist: [
         "router",
-        "app"
+        "app",
+        "productDetail"
     ]
 }
 export const history = createBrowserHistory();

@@ -23,3 +23,9 @@ export const Register = Loadable(
         loader: () => import(/* webpackChunkName: "register" */'../containers/Register')
     })
 )
+
+export const ProductDetail = Loadable(
+    withLoader({
+        loader: () => import(/* webpackChunkName: "productdetail" */'../containers/ProductDetail')
+    })
+)
