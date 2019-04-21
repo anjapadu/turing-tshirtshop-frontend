@@ -17,6 +17,7 @@ import {
 import { appSelector } from '../selectors';
 import TopBar from '../components/TopBar';
 import Loader from '../components/Loader';
+import Cart from '../components/Cart';
 
 class RouterApp extends React.Component {
     render() {
@@ -40,6 +41,7 @@ class RouterApp extends React.Component {
                     exact
                 />
             </Switch>
+            {this.props.showCart && <Cart />}
         </Layout >)
     }
 }
@@ -49,6 +51,7 @@ export const Layout = withRouter((props) => {
         <TopBar
             push={props.push}
         />
+
         <div
             className={'route-container'}
             style={{
@@ -66,10 +69,12 @@ export const Layout = withRouter((props) => {
 
 const mapStateToProps = (state) => {
     const {
-        isLoading
+        isLoading,
+        showCart
     } = appSelector(state);
     return {
-        isLoading
+        isLoading,
+        showCart
     }
 }
 

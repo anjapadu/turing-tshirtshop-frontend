@@ -1,7 +1,8 @@
 import {
     SET_IS_LOADING,
     SET_SELECTED_CATEGORY,
-    SET_SELECTED_DEPARTMENT
+    SET_SELECTED_DEPARTMENT,
+    SET_SHOW_CART
 } from '../constants';
 
 export const setIsLoading = (payload) => ({
@@ -16,3 +17,8 @@ export const setDepartment = (payload) => ({
     type: SET_SELECTED_DEPARTMENT,
     payload
 });
+
+export const setShowCart = (payload) => ({
+    type: SET_SHOW_CART,
+    payload
+})

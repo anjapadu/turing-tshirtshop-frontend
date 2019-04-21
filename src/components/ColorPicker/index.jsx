@@ -8,10 +8,15 @@ class ColorPicker extends PureComponent {
         this.state = {
             selected: this.colors[0]
         }
+        if (this.props.onRef) {
+            this.props.onRef(this)
+        }
     }
     _onPickColor(selected) {
         this.setState({
             selected
+        }, () => {
+            this.props.onPickColor && this.props.onPickColor(this.state.selected)
         })
     }
     _renderColors() {

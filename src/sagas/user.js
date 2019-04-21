@@ -1,7 +1,6 @@
 import {
     call,
     select,
-    xtakeLatest,
     fork,
     put,
     all

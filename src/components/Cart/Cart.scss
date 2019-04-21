@@ -1,0 +1,103 @@
+.shopping-cart-detail {
+  z-index: 9999;
+  transform: scale(0);
+  visibility: hidden;
+  transition: all 0.2s ease-in-out;
+  &.is-visible {
+    visibility: visible;
+    transform: scale(1);
+    transform-origin: top right;
+    &.is-hide {
+      transform: translateX(120%);
+    }
+  }
+
+  padding: 1rem;
+  position: absolute;
+  top: 2.5rem;
+  right: 1rem;
+  width: 30rem;
+  font-family: "Open Sans";
+  box-shadow: 2px 2px 15px $lightgray;
+  border-left: 3px solid $red;
+  // min-height: 500px;
+  background: $white;
+  .item-content {
+    max-height: 400px;
+    @include mobile {
+      max-height: 80%;
+    }
+    overflow-y: scroll;
+  }
+  .total-container {
+    display: flex;
+    flex-direction: row;
+    font-family: "Montserrat";
+    @include mobile {
+      font-size: 0.9rem;
+    }
+    .left {
+      flex: 4;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .right {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+  }
+  .item-cart-container {
+    display: flex;
+    padding: 1rem;
+    flex: 0.8;
+    flex-direction: row;
+    @include mobile {
+      padding: 1rem 0px;
+    }
+    .item-cart-left {
+      img {
+        padding: 1rem;
+        max-width: 7.5rem;
+      }
+    }
+    .item-cart-right {
+      padding: 0px 0.5rem;
+      align-items: flex-start;
+      flex: 2.7;
+      display: flex;
+      flex-direction: column;
+      .detail {
+        font-size: 0.75rem;
+        margin-bottom: 7.5px;
+      }
+    }
+    .price {
+      flex: 1.5;
+      font-family: "Montserrat";
+      font-size: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .old-price {
+        color: lightgray;
+        text-decoration-line: line-through;
+      }
+      @include mobile {
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  @include mobile {
+    display: fixed;
+    overflow: hidden;
+    width: 100%;
+    left: 0;
+    height: 100%;
+    top: 0;
+  }
+}

@@ -69,12 +69,12 @@ $card-shadow: none;
       }
     }
     @include until($desktop) {
-      width: 90%;
+      width: 45%;
       margin: 5% !important;
     }
     @include until($tablet) {
-      width: 45%;
+      width: 95%;
       margin: 2.5%;
     }
-  }
+  } 
 }

@@ -80,12 +80,17 @@ h3 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  
 }
 
 .route-container {
   @include until($desktop) {
     // padding: 10px;
   }
+}
+
+.capitalize{
+  text-transform: capitalize;
 }
 
 @import "containers/Home//Home.scss";
@@ -95,13 +100,15 @@ h3 {
 @import "components/Input/Input.scss";
 @import "components/Form/Form.scss";
 @import "components/Col/Col.scss";
-@import "components/Card/Card.scss";
+@import "components/ProductCard/ProductCard.scss";
 @import "components/SideMenu/SideMenu.scss";
 @import "components/Divider/Divider.scss";
 @import "components/ColorPicker/ColorPicker.scss";
 @import "components/Select/Select.scss";
 @import "components/Row/Row.scss";
 @import "components/Pagination/Pagination.scss";
+@import "components/CartItem/CartItem.scss";
+@import "components/Cart/Cart.scss";
 
 @import "bulma/sass/components/Card.sass";
 @import "bulma/sass/elements/form.sass";

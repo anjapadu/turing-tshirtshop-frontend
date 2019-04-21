@@ -16,6 +16,21 @@
   padding: 0.5rem 0.75rem;
 }
 
+.cart-helper {
+  background: $red;
+  width: 30%;
+  height: auto;
+  border-radius: 100%;
+  position: absolute;
+  top: 15%;
+  font-family: "Montserrat";
+  color: $white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.75em;
+  right: 15%;
+}
 .navbar-item {
   font-family: "Montserrat";
   font-weight: bold;

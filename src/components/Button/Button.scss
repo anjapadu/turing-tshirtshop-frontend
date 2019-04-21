@@ -5,5 +5,8 @@
   letter-spacing: 2px;
   @include until($desktop) {
     align-self: stretch;
+    &.not-responsive {
+      align-self: flex-start;
+    }
   }
 }

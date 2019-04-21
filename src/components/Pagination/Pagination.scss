@@ -8,10 +8,11 @@ $pagination-hover-border-color: $red;
 $pagination-hover-color: $red;
 .pagination {
   .pagination-list {
-    .pagination-link {
-      &:first-child {
-        margin-left: 0px !important;
+    &:first-child {
+      @include from($tablet) {
+        margin-left: 20px !important;
       }
+      
     }
   }
 }

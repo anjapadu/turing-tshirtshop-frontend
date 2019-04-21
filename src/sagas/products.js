@@ -36,7 +36,7 @@ export function* callFetchProducts({ payload } = {}) {
             products(
               categoryId: ${categoryId || null}
               departmentId: ${departmentId || null}
-              paging: {offset: ${offset || 0}, limit: ${limit || 9}}
+              paging: {offset: ${offset || 0}, limit: ${limit || 12}}
             ){
                 data{
                     id

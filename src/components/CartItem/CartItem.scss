@@ -1,0 +1,6 @@
+.cart-helper {
+  &.hide {
+    visibility: hidden;
+    transform: scale(0);
+  }
+}

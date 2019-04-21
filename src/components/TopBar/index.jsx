@@ -1,8 +1,23 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import img from '../../images/tshirtshop.png';
 import Icon from '../Icon';
+import CartItem from '../CartItem';
+import { cartSelector } from '../../selectors/cart';
+import { setShowCart } from '../../actions';
 
-export default (props) => {
+const mapStateToProps = state => {
+    const {
+        subTotalCart
+    } = cartSelector(state);
+    return {
+        subTotalCart
+    }
+}
+
+export default connect(mapStateToProps, {
+    setShowCart
+})(({ subTotalCart, setShowCart }) => {
     return <div>
         <nav className="navbar is-white" role="navigation" aria-label="main navigation">
             <div className="navbar-brand">
@@ -44,9 +59,11 @@ export default (props) => {
                 <div className="navbar-end">
                     <TopBarItem>
                         <Icon
+                            onClick={() => setShowCart(true)}
                             size={'is-large fa-2x'}
-                            icon={"fa-shopping-cart"}
+                            icon={"fa-shopping-bag"}
                         />
+                        <CartItem />
                     </TopBarItem>
                 </div>
             </div>
@@ -65,12 +82,12 @@ export default (props) => {
             <div
                 className={"is-50-percent is-right"}
             >
-                Your bag: 0.00 $
+                Your bag: {subTotalCart.toFixed(2)} $
             </div>
         </nav>
 
     </div>
-}
+})
 
 const TopBarItem = ({ text, children, route, onClick }) => (<a
     className="navbar-item"

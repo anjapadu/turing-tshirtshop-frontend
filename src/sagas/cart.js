@@ -1,20 +1,25 @@
 import {
     call,
     select,
-    xtakeLatest,
     fork,
     put,
-    all
+    all,
+    takeLatest
 } from 'redux-saga/effects';
 
-import {
-
-} from '../constants';
+import { ADD_CART_ITEM } from '../constants';
 
 /***********************/
 /******Start here*******/
 /***********************/
+function* callAddItemToCart() {
+    try {
+
+    } catch (e) {
+        console.log('callAddItemToCart', e);
+    }
+}
 
 export default [
-
+    // takeLatest(ADD_CART_ITEM)    
 ];
