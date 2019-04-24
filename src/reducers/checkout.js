@@ -1,4 +1,4 @@
-import { SET_CHECKOUT_REDUCER_VALUE } from '../constants'
+import { SET_CHECKOUT_REDUCER_VALUE, SIGN_OUT, SET_USER_DATA } from '../constants'
 
 const INITIAL_STATE = {
     firstname: '',
@@ -17,6 +17,16 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, { type, payload }) => {
     switch (type) {
+        case SET_USER_DATA:
+            return {
+                ...state,
+                ...payload,
+            }
+        case SIGN_OUT:
+            return {
+                ...state,
+                ...INITIAL_STATE
+            }
         case SET_CHECKOUT_REDUCER_VALUE:
             return {
                 ...state,
