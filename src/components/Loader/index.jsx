@@ -1,7 +1,7 @@
 import React from 'react';
 import loader from '../../images/loader.gif';
 
-export default ({ style = {}, isPartialLoader = false }) => {
+export default ({ style = {}, isPartialLoader = false, text = "Loading ..." }) => {
     if (isPartialLoader) {
         return <div
             style={{
@@ -24,7 +24,7 @@ export default ({ style = {}, isPartialLoader = false }) => {
             />
             <h3
                 className={"has-text-danger"}
-            >Loading...</h3>
+            >{text}</h3>
         </div>
     }
     return (
@@ -32,6 +32,6 @@ export default ({ style = {}, isPartialLoader = false }) => {
             className="pageloader is-active is-white"
             style={style}
         >
-            <span className="title">Loading...</span>
+            <span className="title">{text}</span>
         </div>)
 };

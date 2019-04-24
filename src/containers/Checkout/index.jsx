@@ -4,18 +4,19 @@ import Row from '../../components/Row';
 import Col from '../../components/Col';
 import Button from '../../components/Button';
 import Form from '../../components/Form';
-import Input from '../../components/Input';
+import Loader from '../../components/Loader';
 import { appSelector, validationSelector } from '../../selectors';
-import Select from '../../components/Select'
 import DeliveryForm from './DeliveryForm';
 import ConfirmationPurchase from './ConfirmationPurchase';
+import Payment from './Payment';
 
 class Checkout extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            step: 3,
-            error: false
+            step: 2,
+            error: false,
+            isLoading: false
         }
     }
 
@@ -23,6 +24,7 @@ class Checkout extends PureComponent {
         return <DeliveryForm />;
     }
     _renderStep() {
+
         switch (this.state.step) {
             case 2:
                 return <DeliveryForm
@@ -30,6 +32,14 @@ class Checkout extends PureComponent {
                 />
             case 3:
                 return <ConfirmationPurchase
+                    {...this.props}
+                />
+            case 4:
+                return <Payment
+                    isLoading={this.state.isLoading}
+                    activeLoading={(isLoading) => this.setState({
+                        isLoading
+                    })}
                     {...this.props}
                 />
         }
@@ -57,6 +67,9 @@ class Checkout extends PureComponent {
                         this.setState({
                             error: 'DELIVERY'
                         })
+                    break;
+                case 3:
+                    passNextStep = true;
                     break;
                 default:
                     break;
@@ -138,11 +151,11 @@ class Checkout extends PureComponent {
                 {this._renderStep()}
                 {this._renderError()}
                 <br />
-                <Button
+                {this.state.step < 4 && < Button
                     text={"Continue"}
                     className={"is-large is-fullwidth is-danger"}
                     onClick={this._onNextStep.bind(this)}
-                />
+                />}
             </Form>
         </React.Fragment>
     }

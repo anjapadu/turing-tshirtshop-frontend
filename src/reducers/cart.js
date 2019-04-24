@@ -4,7 +4,8 @@ import {
     ADD_CART_ITEM_LATER,
     REMOVE_CART_ITEM_LATER,
     SWAP_CART_ITEM,
-    CHANGE_PRODUCT_QUANTITY
+    CHANGE_PRODUCT_QUANTITY,
+    CLEAR_CART
 } from '../constants'
 
 const INITIAL_STATE = {
@@ -14,6 +15,11 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, { type, payload }) => {
     switch (type) {
+        case CLEAR_CART:
+            return {
+                ...state,
+                cartItemsNow: {}
+            }
         case CHANGE_PRODUCT_QUANTITY:
             return {
                 ...state,

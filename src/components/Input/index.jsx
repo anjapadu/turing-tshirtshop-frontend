@@ -21,14 +21,14 @@ class Input extends PureComponent {
                 }`}
             >
                 <input
-                    autoComplete={autoComplete || null}
+                    onFocus={this.props.onFocus || null}
+                    autoComplete={autoComplete || null}
                     type={this.props.type || 'text'}
                     className={`input${
                         isLarge ? ' is-medium' : ''
                         }${
                         isCenter ? ' is-center' : ''
                         }`}
-                    type={type || "text"}
                     placeholder={placeholder || "Placeholder"}
                     value={value || ""}
                     onChange={this._onChange.bind(this)}

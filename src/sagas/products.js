@@ -5,7 +5,8 @@ import {
     put,
     all,
     delay,
-    takeLatest
+    takeLatest,
+    debounce
 } from 'redux-saga/effects';
 import { api } from '../apis'
 import { isCorrect } from '@utils';
@@ -17,7 +18,8 @@ import {
     SET_IS_LOADING_PRODUCTS,
     SET_PRODUCTS_COUNT,
     FETCH_PRODUCTS_ON_PAGE,
-    SET_SELECTED_PAGE
+    SET_SELECTED_PAGE,
+    FETCH_AUTOCOMPLETE
 } from '../constants';
 
 /***********************/
@@ -140,9 +142,68 @@ function* callFetchOnFilter({ type, payload }) {
     })
 }
 
+function* callFetchAutoComplete() {
+    try {
+        const state = yield select();
+        const { autoComplete } = state.app;
+        if (autoComplete === "") {
+            yield put({
+                type: SET_SELECTED_DEPARTMENT,
+                payload: null
+            })
+            return yield call(callFetchProducts, {
+
+            })
+        }
+
+        let query = `{
+            products(
+              autoComplete: "${autoComplete}"
+            ){
+                data{
+                    id
+                    name
+                    description
+                    price
+                    discounted_price
+                    image
+                    image_2
+                    thumbnail
+                    display
+                    categoryName	
+                    categoryId
+                    departmentId
+                    departmentName
+                    sizes
+                    colors
+                    }
+                    count
+            }
+          }`;
+
+        const { data } = yield call(api, {
+            query
+        });
+        if (isCorrect(data)) {
+            yield put({
+                type: SET_PRODUCTS,
+                payload: data.data.products.data
+            })
+            yield put({
+                type: SET_PRODUCTS_COUNT,
+                payload: data.data.products.count
+            })
+        }
+    } catch (e) {
+        console.log('Errror callFetchAutoComplete', e)
+    }
+}
+
 export default [
     takeLatest(FETCH_PRODUCTS_ON_PAGE, callFetchOnPaging),
     takeLatest(FETCH_PRODUCTS, callFetchProducts),
     takeLatest(SET_SELECTED_CATEGORY, callFetchOnFilter),
     takeLatest(SET_SELECTED_DEPARTMENT, callFetchOnFilter),
+    debounce(750, FETCH_AUTOCOMPLETE, callFetchAutoComplete)
+
 ];

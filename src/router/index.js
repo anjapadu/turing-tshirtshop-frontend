@@ -16,6 +16,7 @@ import {
     Register,
     ProductDetail,
     Checkout,
+    SuccessPurchase,
 } from './asyncRoutes';
 import { appSelector, userSelector } from '../selectors';
 import TopBar from '../components/TopBar';
@@ -54,6 +55,11 @@ class RouterApp extends React.Component {
                     isLogged={this.props.isLogged}
                     path={"/checkout"}
                     component={Checkout}
+                    exact
+                />
+                <Route
+                    path={"/success/purchase"}
+                    component={SuccessPurchase}
                     exact
                 />
             </Switch>

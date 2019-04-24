@@ -13,7 +13,6 @@ import Loader from '../../components/Loader';
 import Pagination from '../../components/Pagination';
 
 class Home extends PureComponent {
-
     _renderProducts() {
         return this.props.productList.map((product, index) => {
             return <ProductCard
@@ -43,7 +42,11 @@ class Home extends PureComponent {
                     >
                         {isLoadingProducts ? <Loader
                             isPartialLoader
-                        /> : <div>
+                        /> : <div
+                            style={{
+                                width: '100%'
+                            }}
+                        >
                                 <Pagination
                                     page={selectedPage}
                                     onChangePage={this.props.fetchProductPage}

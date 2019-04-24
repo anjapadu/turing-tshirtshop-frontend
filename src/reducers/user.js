@@ -36,7 +36,6 @@ export default (state = INITIAL_STATE, { type, payload }) => {
             return {
                 ...state,
                 ...payload,
-                token: 'qwe'
             }
         default:
             return state;

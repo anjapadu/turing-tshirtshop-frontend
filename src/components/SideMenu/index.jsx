@@ -5,7 +5,9 @@ import Input from '../Input';
 import Divider from '../Divider';
 import {
     setCategory,
-    setDepartment
+    setDepartment,
+    setAutoComplete,
+    fetchAutoComplete
 } from '../../actions';
 
 class SideMenu extends React.PureComponent {
@@ -52,12 +54,21 @@ class SideMenu extends React.PureComponent {
             </li>
         })
     }
+    _onAutoComplete(value) {
+        this.props.setAutoComplete(value);
+        if (value.length >= 3 || value.length === 0) {
+            this.props.fetchAutoComplete()
+        }
+    }
     render() {
         const {
-            selectedDepartment
+            selectedDepartment,
+            autoComplete
         } = this.props;
         return <aside className="left-menu">
             <Input
+                value={autoComplete || ''}
+                onChange={this._onAutoComplete.bind(this)}
                 icon={"fa-search"}
                 placeholder={"Search a product"}
             />
@@ -82,9 +93,11 @@ const mapStateToProps = (state) => {
     const {
         departmentsCategories,
         selectedCategory,
-        selectedDepartment
+        selectedDepartment,
+        autoComplete
     } = appSelector(state);
     return {
+        autoComplete,
         departmentsCategories,
         selectedCategory,
         selectedDepartment
@@ -93,5 +106,7 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
     setCategory,
-    setDepartment
+    setDepartment,
+    setAutoComplete,
+    fetchAutoComplete
 })(SideMenu)

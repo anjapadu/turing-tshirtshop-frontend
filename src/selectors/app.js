@@ -9,9 +9,12 @@ const getSelectedDepartment = state => state.app.selectedDepartment;
 const getShowCart = state => state.app.showCart;
 const getShippingRegion = state => state.app.shippingRegion;
 
+const getAutoComplete = state => state.app.autoComplete;
+
 const appSelector = createSelector(
-    [getIsLoading, getDepartmentsCategories, getSelectedCategory, getSelectedDepartment, getShowCart, getShippingRegion],
-    (isLoading, departmentsCategories, selectedCategory, selectedDepartment, showCart, shippingRegion) => ({
+    [getIsLoading, getDepartmentsCategories, getSelectedCategory, getSelectedDepartment, getShowCart, getShippingRegion, getAutoComplete],
+    (isLoading, departmentsCategories, selectedCategory, selectedDepartment, showCart, shippingRegion, autoComplete) => ({
+        autoComplete,
         isLoading,
         departmentsCategories,
         selectedCategory,

@@ -35,3 +35,9 @@ export const Checkout = Loadable(
         loader: () => import(/* webpackChunkName: "checkout" */'../containers/Checkout')
     })
 )
+
+export const SuccessPurchase = Loadable(
+    withLoader({
+        loader: () => import(/* webpackChunkName: "successpurchase" */'../containers/SuccessPurchase')
+    })
+)

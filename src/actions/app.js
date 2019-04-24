@@ -2,7 +2,9 @@ import {
     SET_IS_LOADING,
     SET_SELECTED_CATEGORY,
     SET_SELECTED_DEPARTMENT,
-    SET_SHOW_CART
+    SET_SHOW_CART,
+    SET_AUTOCOMPLETE,
+    FETCH_AUTOCOMPLETE
 } from '../constants';
 
 export const setIsLoading = (payload) => ({
@@ -21,4 +23,13 @@ export const setDepartment = (payload) => ({
 export const setShowCart = (payload) => ({
     type: SET_SHOW_CART,
     payload
+})
+
+
+export const setAutoComplete = (payload) => ({
+    type: SET_AUTOCOMPLETE,
+    payload
+})
+export const fetchAutoComplete = () => ({
+    type: FETCH_AUTOCOMPLETE
 })

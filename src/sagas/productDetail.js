@@ -111,6 +111,7 @@ function* callFetchRecommendations({ payload }) {
 }
 
 
+
 export default [
     takeLatest(FETCH_PRODUCT_DETAIL, callFetchProductDetail),
     takeLatest(FETCH_PRODUCT_RECOMMENDATIONS, callFetchRecommendations)

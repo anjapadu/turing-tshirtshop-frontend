@@ -4,7 +4,8 @@ import {
     SET_SELECTED_CATEGORY,
     SET_SELECTED_DEPARTMENT,
     SET_SHOW_CART,
-    SET_SHIPPING_REGION
+    SET_SHIPPING_REGION,
+    SET_AUTOCOMPLETE
 } from '../constants';
 
 const INITIAL_STATE = {
@@ -14,10 +15,16 @@ const INITIAL_STATE = {
     selectedDepartment: null,
     selectedCategory: null,
     showCart: false,
+    autoComplete: ''
 }
 
 export default (state = INITIAL_STATE, { type, payload }) => {
     switch (type) {
+        case SET_AUTOCOMPLETE:
+            return {
+                ...state,
+                autoComplete: payload
+            }
         case SET_SHIPPING_REGION:
             return {
                 ...state,
