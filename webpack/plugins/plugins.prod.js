@@ -15,7 +15,9 @@ new MiniCssExtractPlugin({
 }),
 new WebpackBar(),
 new DefinePlugin({
-    'IS_DEV': JSON.stringify("false")
+    'IS_DEV': JSON.stringify("true"),
+    'GRAPH_API_URL': JSON.stringify("http://localhost:3035/api"),
+    'IMG_ROUTE': JSON.stringify("http://localhost:3035/images/")
 }),
 new CompressionPlugin({
     // asset: '[path].gz[query]',
