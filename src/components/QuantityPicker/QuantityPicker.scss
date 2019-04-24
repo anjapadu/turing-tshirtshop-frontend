@@ -5,6 +5,10 @@
     background: $lightergray;
     width: 2.75rem;
     height: 2.75rem;
+    &.small {
+      width: 2rem;
+      height: 2rem;
+    }
     border-radius: 100%;
     display: flex;
     justify-content: center;
@@ -29,5 +33,9 @@
     font-family: "Montserrat";
     font-size: 1rem;
     border: solid 2px $lightergray;
+    &.small {
+      // height: 1.5rem;
+      width: 4rem;
+    }
   }
 }

@@ -130,6 +130,7 @@ class ProductCard extends PureComponent {
                     />
                     <div>
                         <Select
+                            isRounded
                             onChange={this._onChangeSize.bind(this)}
                             placeholder={"Size"}
                             options={sizes.split(',')}

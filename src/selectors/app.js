@@ -17,7 +17,21 @@ const appSelector = createSelector(
         selectedCategory,
         selectedDepartment,
         showCart,
-        shippingRegion
+        shippingRegion: shippingRegion.filter(i => i.id != 1).map((sr) => {
+            return {
+                value: sr.id,
+                text: sr.shipping_region,
+                shippingOptions: sr.shipping.map((shipping) => {
+                    return {
+                        value: shipping.id,
+                        text: shipping.shipping_type,
+                        shipping_cost: shipping.shipping_cost,
+                        shipping_region_id: shipping.shipping_region_id
+
+                    }
+                })
+            }
+        })
     })
 )
 

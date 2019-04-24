@@ -128,8 +128,9 @@ h3 {
   width: 400px;
 }
 
-@import "containers/Home//Home.scss";
-@import "containers/Login//Login.scss";
+@import "containers/Home/Home.scss";
+@import "containers/Login/Login.scss";
+@import "containers/Checkout/Checkout.scss";
 
 @import "components/TopBar/TopBar.scss";
 @import "components/Button/Button.scss";

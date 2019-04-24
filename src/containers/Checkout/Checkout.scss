@@ -1,0 +1,53 @@
+.confirmation-item {
+  display: flex;
+  background: $white;
+  padding: 1rem;
+  flex-direction: row;
+  margin-bottom: 0.75rem;
+  .left {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+  }
+  .center {
+    padding-left: 0.75rem;
+    flex: 4;
+    p {
+      margin: 5px 0px;
+    }
+  }
+  .right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    h3 {
+      margin-bottom: 1rem;
+    }
+    .button {
+      margin-top: 1rem;
+      width: 100%;
+    }
+    p {
+      text-align: right;
+    }
+  }
+}
+
+.resume-container {
+  display: flex;
+  background: $white;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1 1;
+  .total-item {
+    display: flex;
+    flex: 1 1;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

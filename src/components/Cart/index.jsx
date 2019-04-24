@@ -156,10 +156,10 @@ class Cart extends PureComponent {
                         className={"right"}
                     >
                         <p>$ {subTotalCart.toFixed(2)}</p>
-                        <p>$ 12.52</p>
+                        <p>$ 00.00</p>
                         <p
                             className={"has-text-danger"}
-                        >$ 132.52</p>
+                        >$ {subTotalCart.toFixed(2)}</p>
                     </div>
                 </div>
                 <Button
