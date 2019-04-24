@@ -8,6 +8,7 @@ export default class SizePicker extends PureComponent {
         this.state = {
             selected: this.sizes[0]
         }
+        this.props.onPickSize && this.props.onPickSize(this.sizes[0]);
         if (this.props.onRef) {
             this.props.onRef(this)
         }

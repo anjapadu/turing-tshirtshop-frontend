@@ -20,6 +20,10 @@ import {
 /***********************/
 function* callFetchProductDetail({ payload }) {
     try {
+        yield put({
+            type: SET_IS_LOADING_PRODUCT_DETAILS,
+            payload: true
+        })
         let query = `{
             products(
               id: ${payload}
@@ -50,7 +54,6 @@ function* callFetchProductDetail({ payload }) {
             type: SET_PRODUCT_DETAIL,
             payload: data.data.products.data[0]
         })
-        console.log(data.data.products.data[0])
         yield fork(callFetchRecommendations, {
             payload: data.data.products.data[0]
         })
@@ -66,6 +69,7 @@ function* callFetchProductDetail({ payload }) {
 
 function* callFetchRecommendations({ payload }) {
     try {
+        console.log({ saga: payload })
         const { categoryId, departmentId, id } = payload;
         let query = `{
             products(

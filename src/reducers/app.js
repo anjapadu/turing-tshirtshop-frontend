@@ -3,19 +3,26 @@ import {
     SET_DEPARTMENTS_CATEGORIES,
     SET_SELECTED_CATEGORY,
     SET_SELECTED_DEPARTMENT,
-    SET_SHOW_CART
+    SET_SHOW_CART,
+    SET_SHIPPING_REGION
 } from '../constants';
 
 const INITIAL_STATE = {
     isLoading: true,
     departmentsCategories: [],
+    shippingRegion: [],
     selectedDepartment: null,
     selectedCategory: null,
-    showCart: false
+    showCart: false,
 }
 
 export default (state = INITIAL_STATE, { type, payload }) => {
     switch (type) {
+        case SET_SHIPPING_REGION:
+            return {
+                ...state,
+                shippingRegion: payload
+            }
         case SET_SHOW_CART:
             return {
                 ...state,

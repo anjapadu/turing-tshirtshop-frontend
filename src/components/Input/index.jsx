@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react';
 
 
 class Input extends PureComponent {
-    _onChange() {
-
+    _onChange(e) {
+        this.props.onChange && this.props.onChange(e.target.value);
     }
     render() {
         const {
@@ -12,7 +12,8 @@ class Input extends PureComponent {
             value,
             type,
             isCenter,
-            isLarge
+            isLarge,
+            autoComplete
         } = this.props;
         return <div className="field">
             <div className={`control${
@@ -20,7 +21,8 @@ class Input extends PureComponent {
                 }`}
             >
                 <input
-
+                    autoComplete={autoComplete || null}
+                    type={this.props.type || 'text'}
                     className={`input${
                         isLarge ? ' is-medium' : ''
                         }${

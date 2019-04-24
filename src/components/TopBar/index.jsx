@@ -5,19 +5,27 @@ import Icon from '../Icon';
 import CartItem from '../CartItem';
 import { cartSelector } from '../../selectors/cart';
 import { setShowCart } from '../../actions';
+import { userSelector } from '../../selectors';
+import { capitalize } from '@utils';
 
 const mapStateToProps = state => {
     const {
         subTotalCart
     } = cartSelector(state);
+    const {
+        name,
+        isLogged
+    } = userSelector(state)
     return {
+        name,
+        isLogged,
         subTotalCart
     }
 }
 
 export default connect(mapStateToProps, {
     setShowCart
-})(({ subTotalCart, setShowCart, push }) => {
+})(({ subTotalCart, setShowCart, push, isLogged, name }) => {
     return <div>
         <nav className="navbar is-white" role="navigation" aria-label="main navigation">
             <div
@@ -77,11 +85,16 @@ export default connect(mapStateToProps, {
             <div
                 className={"is-50-percent"}
             >
-                Hi,&nbsp;<a
-                    onClick={() => push('/login')}
-                >Sign in</a>&nbsp;or&nbsp;<a
-                    onClick={() => push('/register')}
-                >Register</a>
+
+                {!isLogged ? < React.Fragment >
+                    Hi,&nbsp; X <a
+                        onClick={() => push('/login')}
+                    >Sign in</a>&nbsp;or&nbsp;<a
+                        onClick={() => push('/register')}
+                    >Register</a>
+                </React.Fragment> : <React.Fragment>
+                        Hi, {`${capitalize(name)}`}
+                    </React.Fragment>}
             </div>
             <div
                 className={"is-50-percent is-right"}
@@ -90,7 +103,7 @@ export default connect(mapStateToProps, {
             </div>
         </nav>
 
-    </div>
+    </div >
 })
 
 const TopBarItem = ({ text, children, route, onClick }) => (<a

@@ -7,7 +7,8 @@ import Select from '../Select';
 import {
     addProductToCart,
     setProductDetail
-} from '../../actions'
+} from '../../actions';
+import { NotificationAddProduct } from '@utils';
 
 const BackFace = ({ children }) => {
     return (<div
@@ -63,6 +64,7 @@ class ProductCard extends PureComponent {
             selectedColor,
             selectedSize
         })
+        NotificationAddProduct(this.props.product)
     }
     _onChangeSize(selectedSize) {
         this.setState({

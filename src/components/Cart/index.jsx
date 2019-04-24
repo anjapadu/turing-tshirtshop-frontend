@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
 import { cartSelector } from '../../selectors';
 import Button from '../Button';
 import Icon from '../Icon';
@@ -11,6 +12,8 @@ import {
 
 
 const ItemCart = ({ thumbnail, name, selectedColor, selectedSize, price, discounted_price, quantity, removeCartItem, productKey }) => {
+    let _price = (price * (quantity || 1)).toFixed(2);
+    let _discounted_price = (discounted_price * (quantity || 1)).toFixed(2)
     return <div
         className={"item-cart-container"}
     >
@@ -56,16 +59,19 @@ const ItemCart = ({ thumbnail, name, selectedColor, selectedSize, price, discoun
         >
             {discounted_price != 0 && <span
                 className={"old-price"}
-            >$ {price}</span>}
-            $ {discounted_price !== 0 ? discounted_price : price}
+            >$ {_price}</span>}
+            $ {discounted_price !== 0 ? _discounted_price : _price}
         </div>
 
     </div>
 }
 
 class Cart extends PureComponent {
-    state = {
-        show: false
+    constructor(props) {
+        super(props);
+        this.state = {
+            show: false
+        }
     }
     componentDidMount() {
         setTimeout(() => {
@@ -82,7 +88,6 @@ class Cart extends PureComponent {
                 {...this.props.cartItemsNow[cartItemKey]}
                 removeCartItem={this.props.removeCartItem}
             />
-
         })
     }
     _onCloseCart() {
@@ -94,8 +99,9 @@ class Cart extends PureComponent {
             }, 250)
         })
     }
-    _removeItem() {
-
+    _onCheckout() {
+        this._onCloseCart();
+        this.props.push('/checkout');
     }
     render() {
         const {
@@ -103,59 +109,77 @@ class Cart extends PureComponent {
             cartItemsNowCount,
             subTotalCart
         } = this.props;
-        return <div
-            className={`shopping-cart-detail${this.state.show ? ' is-visible' : ''}${this.state.hide ? ' is-hide' : ''}`}
-        >
-            <Icon
+        return <React.Fragment>
+            <div
+                className={`shopping-cart-detail${this.state.show ? ' is-visible' : ''}${this.state.hide ? ' is-hide' : ''}`}
+            >
+                <Icon
+                    onClick={this._onCloseCart.bind(this)}
+                    style={{
+                        position: 'absolute',
+                        top: 10,
+                        right: 10,
+                        transform: "scale(0.75)"
+                    }}
+                    icon={"fa-times fa-2x"}
+                />
+                <h2>{cartItemsNowCount} Items in Your Cart</h2>
+                <div
+                    className={"item-content"}
+                >
+                    {this._renderItems()}
+                    {cartItemsNowCount === 0 && <h3
+                        style={{
+                            margin: '3rem 0px'
+                        }}
+                        className={"has-text-danger has-text-centered"}
+                    >You don't have any product yet.</h3>}
+                </div>
+                <Divider
+                    style={{
+                        marginTop: 10,
+                        marginBottom: 10
+                    }}
+                    content={" "}
+                />
+                <div
+                    className={"total-container"}
+                >
+                    <div
+                        className={"left"}
+                    >
+                        <p>SubTotal:</p>
+                        <p>Tax:</p>
+                        <p>Total:</p>
+                    </div>
+                    <div
+                        className={"right"}
+                    >
+                        <p>$ {subTotalCart.toFixed(2)}</p>
+                        <p>$ 12.52</p>
+                        <p
+                            className={"has-text-danger"}
+                        >$ 132.52</p>
+                    </div>
+                </div>
+                <Button
+                    text={"Checkout"}
+                    style={{
+                        marginTop: "0.75rem"
+                    }}
+                    className={"is-medium is-rounded is-fullwidth is-danger"}
+                    onClick={this._onCheckout.bind(this)}
+                />
+            </div>
+            <div
                 onClick={this._onCloseCart.bind(this)}
                 style={{
-                    position: 'absolute',
-                    top: 10,
-                    right: 10,
-                    transform: "scale(0.75)"
+                    width: "100%",
+                    height: '100%',
+                    position: 'fixed',
                 }}
-                icon={"fa-times fa-2x"}
             />
-            <h2>{cartItemsNowCount} Items in Your Cart</h2>
-            <div
-                className={"item-content"}
-            >
-                {this._renderItems()}
-                {cartItemsNowCount === 0 && <h3
-                    style={{
-                        margin: '3rem 0px'
-                    }}
-                    className={"has-text-danger has-text-centered"}
-                >You don't have any product yet.</h3>}
-            </div>
-            <Divider
-                style={{
-                    marginTop: 10,
-                    marginBottom: 10
-                }}
-                content={" "}
-            />
-            <div
-                className={"total-container"}
-            >
-                <div
-                    className={"left"}
-                >
-                    <p>SubTotal:</p>
-                    <p>Tax:</p>
-                    <p>Total:</p>
-                </div>
-                <div
-                    className={"right"}
-                >
-                    <p>$ {subTotalCart.toFixed(2)}</p>
-                    <p>$ 12.52</p>
-                    <p
-                        className={"has-text-danger"}
-                    >$ 132.52</p>
-                </div>
-            </div>
-        </div>
+        </React.Fragment>
     }
 }
 
@@ -175,5 +199,6 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
     setShowCart,
-    removeCartItem
+    removeCartItem,
+    push
 })(Cart);

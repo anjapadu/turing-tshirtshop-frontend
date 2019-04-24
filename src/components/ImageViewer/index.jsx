@@ -4,12 +4,18 @@ export default class ImageViewer extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            selected: 0
+            selected: 0,
+            tall: false
         }
     }
     _onChangeImage(selected) {
         this.setState({
             selected
+        })
+    }
+    _onLoadImage({ target }) {
+        this.setState({
+            tall: target.naturalWidth / target.naturalHeight > 1 ? false : true
         })
     }
     render() {
@@ -21,7 +27,9 @@ export default class ImageViewer extends PureComponent {
                 className={"image-show"}
             >
                 <img
+                    className={`${this.state.tall ? ' tall' : ' wide'}`}
                     src={`${IMG_ROUTE}${images[this.state.selected]}`}
+                    onLoad={this._onLoadImage.bind(this)}
                 />
             </div>
             <div

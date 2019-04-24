@@ -2,6 +2,7 @@ import React from 'react';
 import {
     Switch,
     Route,
+    Redirect
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
@@ -14,8 +15,9 @@ import {
     Login,
     Register,
     ProductDetail,
+    Checkout,
 } from './asyncRoutes';
-import { appSelector } from '../selectors';
+import { appSelector, userSelector } from '../selectors';
 import TopBar from '../components/TopBar';
 import Loader from '../components/Loader';
 import Cart from '../components/Cart';
@@ -31,12 +33,14 @@ class RouterApp extends React.Component {
                     component={Home}
                     exact
                 />
-                <Route
+                <NotLoggedOnlyRoutes
                     path={"/login"}
                     component={Login}
+                    isLogged={this.props.isLogged}
                     exact
                 />
-                <Route
+                <NotLoggedOnlyRoutes
+                    isLogged={this.props.isLogged}
                     path={"/register"}
                     component={Register}
                     exact
@@ -44,6 +48,12 @@ class RouterApp extends React.Component {
                 <Route
                     path={"/product/:id"}
                     component={ProductDetail}
+                    exact
+                />
+                <ProtectedRoute
+                    isLogged={this.props.isLogged}
+                    path={"/checkout"}
+                    component={Checkout}
                     exact
                 />
             </Switch>
@@ -73,14 +83,72 @@ export const Layout = withRouter((props) => {
     </React.Fragment >)
 })
 
+
+/**
+ * Redirect to home if is already logged
+ */
+const NotLoggedOnlyRoutes = ({ component: Component, ...rest }) => {
+    return (
+        <Route
+            {...rest}
+            render={props => {
+                return (!rest.isLogged) ? (
+                    <Component {...props} />
+                ) : (
+                        <Redirect
+                            to={{
+                                pathname: '/',
+                                state: {
+                                    from: props.location
+                                }
+                            }}
+                        />
+                    )
+            }
+            }
+        />
+    )
+}
+
+const ProtectedRoute = ({ component: Component, ...rest }) => {
+    /**
+     * It's posible to handle Roles.
+     * var regex = new RegExp(rest.roles, 'g');
+     * let hasScope = rest.requiredScope.match(regex) !== null;
+     */
+    return (
+        <Route
+            {...rest}
+            render={props => {
+                return rest.isLogged ?
+                    (<Component
+                        {...props}
+                    />
+                    ) : (
+                        <Redirect
+                            to={{
+                                pathname: '/login',
+                                state: { from: props.location }
+                            }}
+                        />
+                    )
+            }}
+        />
+    )
+}
+
 const mapStateToProps = (state) => {
     const {
         isLoading,
-        showCart
+        showCart,
     } = appSelector(state);
+    const {
+        isLogged
+    } = userSelector(state);
     return {
         isLoading,
-        showCart
+        showCart,
+        isLogged
     }
 }
 

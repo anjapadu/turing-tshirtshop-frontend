@@ -2,10 +2,11 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Row from '../../components/Row';
 import Col from '../../components/Col';
-import { goBack } from 'connected-react-router'
+import { goBack, push } from 'connected-react-router'
 import { productDetailSelector } from '../../selectors/productDetail';
 import {
     fetchProductDetail,
+    addProductToCart,
     fetchRecommendations
 } from '../../actions';
 import Loader from '../../components/Loader';
@@ -14,32 +15,43 @@ import Icon from '../../components/Icon';
 import ColorPicker from '../../components/ColorPicker';
 import ImageViewer from '../../components/ImageViewer';
 import SizePicker from '../../components/SizePicker';
-import Input from '../../components/Input';
 import QuantityPicker from '../../components/QuantityPicker';
 import Reviews from '../../components/Reviews';
 import ProductRecomendations from '../../components/ProductRecomendations';
-
+import { NotificationAddProduct } from '@utils';
 class ProductDetail extends PureComponent {
     constructor(props) {
         super(props);
+        this.state = {
+            color: null,
+            size: null,
+            quantity: null
+        }
     }
     componentDidMount() {
         //Only fetch product if product is != previous product or if it does not exist (i.e. when you load an url of a product as first page.)
         const {
             productDetail,
-            fetchProductDetail
+            fetchProductDetail,
+            fetchRecommendations
         } = this.props;
         const { id } = this.props.match.params;
         if (!productDetail || productDetail.id != id) {
             fetchProductDetail(id);
+        } else {
+            fetchRecommendations({
+                categoryId: productDetail.categoryId,
+                departmentId: productDetail.departmentId,
+                id: productDetail.id,
+            })
         }
     }
-    renderPrice() {
+    _renderPrice() {
         const { price, discounted_price } = this.props.productDetail
         if (discounted_price == 0) {
             return <h2
                 className={"has-text-danger"}
-            >$ {price}</h2>
+            >$ {price.toFixed(2)}</h2>
         }
         return <h2
             className={"has-text-danger"}
@@ -48,7 +60,39 @@ class ProductDetail extends PureComponent {
             style={{
                 textDecorationLine: 'line-through'
             }}
-        >{price}</span> $ {discounted_price}</h2>
+        >$ {price.toFixed(2)}</span> $ {discounted_price.toFixed(2)}</h2>
+    }
+    _onAddToCart() {
+        const {
+            color,
+            size,
+            quantity
+        } = this.state;
+
+        this.props.addProductToCart({
+            ...this.props.productDetail,
+            productKey: `${this.props.productDetail.id}_${color}_${size}`,
+            selectedColor: color,
+            selectedSize: size,
+            quantity
+        })
+        NotificationAddProduct(this.props.productDetail)
+        this.props.push('/')
+    }
+    _onPickColor(color) {
+        this.setState({
+            color
+        })
+    }
+    _onPickSize(size) {
+        this.setState({
+            size
+        })
+    }
+    _onChangeQuantity(quantity) {
+        this.setState({
+            quantity
+        })
     }
     render() {
         const {
@@ -132,7 +176,7 @@ class ProductDetail extends PureComponent {
                             className={"is-size-5"}
                         >{description}</p>
                         <br />
-                        {this.renderPrice()}
+                        {this._renderPrice()}
                         <br />
                         <h2
                             className={"is-gray"}
@@ -144,22 +188,27 @@ class ProductDetail extends PureComponent {
                                 paddingRight: 0
                             }}
                             colors={colors}
+                            onPickColor={this._onPickColor.bind(this)}
                         />
                         <h2
                             className={"is-gray"}
                         >Size</h2>
                         <SizePicker
                             sizes={sizes}
+                            onPickSize={this._onPickSize.bind(this)}
                         />
                         <br />
                         <h2
                             className={"is-gray"}
                         >Quantity</h2>
-                        <QuantityPicker />
+                        <QuantityPicker
+                            onChange={this._onChangeQuantity.bind(this)}
+                        />
 
                         <br />
                         <br />
                         <Button
+                            onClick={this._onAddToCart.bind(this)}
                             className={"is-rounded is-danger is-large"}
                             text={"Add to Cart"}
                         />
@@ -217,7 +266,9 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
+    addProductToCart,
     fetchProductDetail,
+    fetchRecommendations,
     goBack,
-    fetchRecommendations
+    push
 })(ProductDetail)

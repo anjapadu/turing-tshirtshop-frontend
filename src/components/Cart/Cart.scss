@@ -32,7 +32,9 @@
   .total-container {
     display: flex;
     flex-direction: row;
-    font-family: "Montserrat";
+    p {
+      font-family: "Montserrat";
+    }
     @include mobile {
       font-size: 0.9rem;
     }

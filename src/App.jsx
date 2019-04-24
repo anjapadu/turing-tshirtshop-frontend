@@ -32,7 +32,12 @@ class App extends Component {
 				// onBeforeLift={__ASYNC_FUNCTION_BEFORE_REHYDRATE__}
 				loading={<div>LOADING...</div>}
 			>
-				<ConnectedRouter history={history}>
+				<ConnectedRouter
+					history={history}
+					onUpdate={(e) => {
+						console.log(e)
+					}}
+				>
 					<RouterApp />
 				</ConnectedRouter>
 			</PersistGate>

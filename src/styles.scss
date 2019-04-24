@@ -4,6 +4,7 @@ $black: #2e2e2e;
 $darkgray: #6c6c6c;
 $lightgray: #b4b4b4;
 $darkpink: #f62f5e;
+$red: $darkpink;
 $white: #fff;
 $form-gray: #e0e0e0;
 
@@ -16,18 +17,36 @@ $lightgreen: #effc90;
 $navbar-item-color: $black;
 $navbar-height: 5rem;
 
+/**
+ * Steps override
+*/
+$steps-completed-color: $red;
+$steps-active-color: $red;
+$steps-marker-default-border: 0.2em solid $lightergray;
 @import "bulma";
 
 @import "bulma-pageloader/dist/css/bulma-pageloader.sass";
 @import "bulma-divider/dist/css/bulma-divider.sass";
-
+@import "bulma-steps/dist/css/bulma-steps.sass";
+/**
+ * Steps override
+*/
+.steps {
+  p {
+    font-family: "Open Sans";
+    &.step-title {
+      font-family: "Montserrat";
+    }
+  }
+}
 .is-gray {
   color: $lightgray !important;
 }
 .is-gray-background {
   background: $lightergray;
 }
-p {
+p,
+small {
   font-family: "Open Sans";
 }
 body,
@@ -101,7 +120,16 @@ h3 {
   text-transform: capitalize;
 }
 
+.bulma-notification-notice {
+  position: fixed;
+  top: 9rem;
+  right: 5px;
+  z-index: 1000;
+  width: 400px;
+}
+
 @import "containers/Home//Home.scss";
+@import "containers/Login//Login.scss";
 
 @import "components/TopBar/TopBar.scss";
 @import "components/Button/Button.scss";

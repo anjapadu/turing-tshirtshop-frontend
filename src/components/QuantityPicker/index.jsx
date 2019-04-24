@@ -7,6 +7,7 @@ export default class QuantityPicker extends React.PureComponent {
         this.state = {
             value: 1
         }
+        this.props.onChange && this.props.onChange(this.state.value);
         if (this.props.onRef) {
             this.props.onRef(this)
         }
@@ -18,9 +19,9 @@ export default class QuantityPicker extends React.PureComponent {
             this.props.onChange && this.props.onChange(this.state.value)
         })
     }
-    _onChange(e) {
+    _onChange({ target }) {
         this.setState({
-            value: parseInt(e.target.value.replace(/[^0-9]+/g, ''))
+            value: target.value == '' ? 1 : parseInt(target.value.replace(/[^0-9]+/g, ''))
         }, () => {
             this.props.onChange && this.props.onChange(this.state.value)
         })

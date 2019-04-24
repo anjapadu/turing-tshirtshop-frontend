@@ -29,3 +29,9 @@ export const ProductDetail = Loadable(
         loader: () => import(/* webpackChunkName: "productdetail" */'../containers/ProductDetail')
     })
 )
+
+export const Checkout = Loadable(
+    withLoader({
+        loader: () => import(/* webpackChunkName: "checkout" */'../containers/Checkout')
+    })
+)
