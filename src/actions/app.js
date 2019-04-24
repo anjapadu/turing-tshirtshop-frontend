@@ -4,7 +4,8 @@ import {
     SET_SELECTED_DEPARTMENT,
     SET_SHOW_CART,
     SET_AUTOCOMPLETE,
-    FETCH_AUTOCOMPLETE
+    FETCH_AUTOCOMPLETE,
+    SIGN_OUT
 } from '../constants';
 
 export const setIsLoading = (payload) => ({
@@ -32,4 +33,8 @@ export const setAutoComplete = (payload) => ({
 })
 export const fetchAutoComplete = () => ({
     type: FETCH_AUTOCOMPLETE
+})
+
+export const signOut = () => ({
+    type: SIGN_OUT
 })

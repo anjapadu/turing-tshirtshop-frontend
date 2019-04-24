@@ -4,7 +4,7 @@ import img from '../../images/tshirtshop.png';
 import Icon from '../Icon';
 import CartItem from '../CartItem';
 import { cartSelector } from '../../selectors/cart';
-import { setShowCart } from '../../actions';
+import { setShowCart, signOut } from '../../actions';
 import { userSelector } from '../../selectors';
 import { capitalize } from '@utils';
 
@@ -24,8 +24,9 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, {
-    setShowCart
-})(({ subTotalCart, setShowCart, push, isLogged, name }) => {
+    setShowCart,
+    signOut
+})(({ subTotalCart, setShowCart, push, isLogged, name, signOut }) => {
     return <div>
         <nav className="navbar is-white" role="navigation" aria-label="main navigation">
             <div
@@ -56,27 +57,28 @@ export default connect(mapStateToProps, {
             </div>
             <div className="navbar-menu">
                 <div className="navbar-start">
-                    <TopBarItem
 
-                        text={"Regional"}
-                    />
-                    <TopBarItem
-                        text={"Nature"}
-                    />
-                    <TopBarItem
-                        text={"Seasonal"}
-                    />
                 </div>
 
                 <div className="navbar-end">
-                    <TopBarItem>
+                    <TopBarItem
+                        onClick={() => setShowCart(true)}
+                    >
                         <Icon
-                            onClick={() => setShowCart(true)}
                             size={'is-large fa-2x'}
-                            icon={"fa-shopping-bag"}
+                            icon={"fa-shopping-cart"}
                         />
                         <CartItem />
                     </TopBarItem>
+                    {isLogged && <TopBarItem
+                        onClick={() => signOut()}
+                    >
+                        <Icon
+
+                            size={'is-large fa-2x'}
+                            icon={"fa-sign-out-alt"}
+                        />
+                    </TopBarItem>}
                 </div>
             </div>
         </nav>
@@ -87,7 +89,7 @@ export default connect(mapStateToProps, {
             >
 
                 {!isLogged ? < React.Fragment >
-                    Hi,&nbsp; X <a
+                    Hi,&nbsp; <a
                         onClick={() => push('/login')}
                     >Sign in</a>&nbsp;or&nbsp;<a
                         onClick={() => push('/register')}
@@ -108,6 +110,7 @@ export default connect(mapStateToProps, {
 
 const TopBarItem = ({ text, children, route, onClick }) => (<a
     className="navbar-item"
+    onClick={onClick}
 >
     {text || children}
 </a>)

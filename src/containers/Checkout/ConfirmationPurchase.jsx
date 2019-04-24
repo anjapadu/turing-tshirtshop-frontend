@@ -6,7 +6,8 @@ import Button from '../../components/Button';
 import QuantityPicker from '../../components/QuantityPicker';
 import { checkoutSelector } from '../../selectors/checkout';
 import {
-    changeProductQuantity
+    changeProductQuantity,
+    removeCartItem
 } from '../../actions';
 
 class ConfirmationPurchase extends PureComponent {
@@ -62,6 +63,11 @@ class ConfirmationPurchase extends PureComponent {
                         onChange={this._onChangeQuantity.bind(this, cartItem)}
                     />
                     <Button
+                        disabled={Object.keys(this.props.cartItemsNow).length == 1}
+                        onClick={() => {
+                            if (Object.keys(this.props.cartItemsNow).length > 1)
+                                this.props.removeCartItem(cartItem)
+                        }}
                         text={"Remove"}
                         className={"is-danger is-rounded is-small"}
                     />
@@ -117,7 +123,8 @@ class ConfirmationPurchase extends PureComponent {
 const mapStateToProps = (state) => {
     const {
         cartItemsNow,
-        subTotalCart
+        subTotalCart,
+        cartItemsNowCount
     } = cartSelector(state);
     const {
         shippingRegion
@@ -127,6 +134,7 @@ const mapStateToProps = (state) => {
         shipping_region_id
     } = checkoutSelector(state);
     return {
+        cartItemsNowCount,
         cartItemsNow,
         subTotalCart,
         shippingRegion,
@@ -137,5 +145,6 @@ const mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps, {
-    changeProductQuantity
+    changeProductQuantity,
+    removeCartItem
 })(ConfirmationPurchase)

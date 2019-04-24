@@ -91,10 +91,13 @@ class Login extends PureComponent {
                 email,
                 googleId
             } = response.profileObj;
+
             this.props.setUser(email);
+            // setTimeout(() => {
             this.props.login({
                 password: googleId,
                 callbackError: (errorMessage) => {
+                    console.log({ errorMessage })
                     if (errorMessage === 'USER_NOT_EXIST') {
                         return this.props.register({
                             email,
@@ -114,6 +117,8 @@ class Login extends PureComponent {
                     })
                 }
             })
+            // });
+
         }
 
     }

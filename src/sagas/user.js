@@ -92,7 +92,7 @@ function* callRegister({ payload }) {
         if (!data.errors)
             yield put({
                 type: SET_USER_DATA,
-                payload: data.data.customerLogin
+                payload: data.data.registerCustomer
             })
         else
             callbackError(data.errors.join('|'))

@@ -54,7 +54,7 @@ class ProductCard extends PureComponent {
             >$ {discounted_price}</span>
         </p>
     }
-    _onSelectItem() {
+    _onSelectItem(isBuyNow = false) {
         const { selected: selectedColor } = this._colorPicker.state;
         const { selectedSize } = this.state;
         const { id } = this.props.product;
@@ -64,7 +64,11 @@ class ProductCard extends PureComponent {
             selectedColor,
             selectedSize
         })
-        NotificationAddProduct(this.props.product)
+        if (isBuyNow) {
+            this.props.push('/checkout');
+        } else {
+            NotificationAddProduct(this.props.product)
+        }
     }
     _onChangeSize(selectedSize) {
         this.setState({
@@ -136,6 +140,7 @@ class ProductCard extends PureComponent {
                             options={sizes.split(',')}
                         />
                         <Button
+                            onClick={this._onSelectItem.bind(this, true)}
                             style={{
                                 marginLeft: 10
                             }}

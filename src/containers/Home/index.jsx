@@ -14,6 +14,9 @@ import Pagination from '../../components/Pagination';
 
 class Home extends PureComponent {
     _renderProducts() {
+        if (this.props.productList.length === 0) {
+            return <h2>We could not find products for this search :C</h2>
+        }
         return this.props.productList.map((product, index) => {
             return <ProductCard
                 key={`_${index}`}

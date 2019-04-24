@@ -162,14 +162,14 @@ class Cart extends PureComponent {
                         >$ {subTotalCart.toFixed(2)}</p>
                     </div>
                 </div>
-                <Button
+                {this.props.cartItemsNowCount > 0 && <Button
                     text={"Checkout"}
                     style={{
                         marginTop: "0.75rem"
                     }}
                     className={"is-medium is-rounded is-fullwidth is-danger"}
                     onClick={this._onCheckout.bind(this)}
-                />
+                />}
             </div>
             <div
                 onClick={this._onCloseCart.bind(this)}

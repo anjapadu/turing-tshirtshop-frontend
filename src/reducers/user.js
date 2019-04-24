@@ -1,4 +1,4 @@
-import { SET_USER_DATA, SET_EMAIL, SET_PASSWORD } from '../constants'
+import { SET_USER_DATA, SET_EMAIL, SET_PASSWORD, SIGN_OUT } from '../constants'
 
 const INITIAL_STATE = {
     id: null,
@@ -22,6 +22,11 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, { type, payload }) => {
     switch (type) {
+        case SIGN_OUT:
+            return {
+                ...state,
+                ...INITIAL_STATE
+            }
         case SET_EMAIL:
             return {
                 ...state,

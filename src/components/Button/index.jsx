@@ -16,6 +16,7 @@ class Button extends PureComponent {
     }
     render() {
         return <a
+            disabled={this.props.disabled}
             onClick={this._onClick.bind(this)}
             className={`
             button
