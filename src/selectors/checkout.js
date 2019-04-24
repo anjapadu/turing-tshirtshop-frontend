@@ -43,7 +43,7 @@ const validationSelector = createSelector(
     [getFirstname, getLastname, getAddress_1, getAddress_2, getCity, getRegion, getPostal_code, getCountry, getShipping_region_id, getTotal_amount, getComments, getShipping_id],
     (firstname, lastname, address_1, address_2, city, region, postal_code, country, shipping_region_id, total_amount, comments, shipping_id) => {
         return {
-            isValidDelivery: firstname.trim() != '' && lastname.trim() != '' && address_1.trim() != '' && city.trim() != '' && region.trim() != '' && postal_code != '' && country != '' && shipping_region_id && shipping_id
+            isValidDelivery: (firstname || '').trim() != '' && (lastname || '').trim() != '' && (address_1 || '').trim() != '' && (city || '').trim() != '' && (region || '').trim() != '' && (postal_code || '').trim() != '' && (country || '').trim() != '' && shipping_region_id && shipping_id
         }
     }
 )
