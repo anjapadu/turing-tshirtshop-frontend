@@ -96,6 +96,7 @@ class Login extends PureComponent {
             // setTimeout(() => {
             this.props.login({
                 password: googleId,
+                isGoogle: true,
                 callbackError: (errorMessage) => {
                     console.log({ errorMessage })
                     if (errorMessage === 'USER_NOT_EXIST') {

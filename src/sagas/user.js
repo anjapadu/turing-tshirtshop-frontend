@@ -15,13 +15,14 @@ import { LOGIN, SET_USER_DATA, REGISTER } from '../constants';
 
 function* callLogin({ payload }) {
 
-    const { password, callbackError } = payload;
+    const { password, callbackError, isGoogle } = payload;
     const { email } = (yield select()).user;
     try {
         const query = `{
             customerLogin(
               email: "${email.trim().toLowerCase()}"
               password: "${password}"
+              isGoogle: ${isGoogle ? true : false}
             ){
               name
               email
@@ -44,7 +45,6 @@ function* callLogin({ payload }) {
         const { data } = yield call(api, {
             query
         })
-        console.log({ data })
         if (!data.errors)
             yield put({
                 type: SET_USER_DATA,
