@@ -4,7 +4,13 @@ import * as constants from '../../constants';
 describe('app reducer', () => {
     it('should return the initial state', () => {
         expect(appReducer(undefined, {})).toEqual({
-            isLoading: true
+            isLoading: true,
+            departmentsCategories: [],
+            shippingRegion: [],
+            selectedDepartment: null,
+            selectedCategory: null,
+            showCart: false,
+            autoComplete: ''
         })
     })
     it('should handle SET_IS_LOADING', () => {

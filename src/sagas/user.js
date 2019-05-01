@@ -13,10 +13,11 @@ import { LOGIN, SET_USER_DATA, REGISTER } from '../constants';
 /******Start here*******/
 /***********************/
 
-function* callLogin({ payload }) {
+export function* callLogin({ payload }) {
 
-    const { password, callbackError, isGoogle } = payload;
+    const { password, callbackError, isGoogle, successCallback } = payload;
     const { email } = (yield select()).user;
+    console.log({ email })
     try {
         const query = `{
             customerLogin(
@@ -42,19 +43,24 @@ function* callLogin({ payload }) {
             }
           }`;
 
-        const { data } = yield call(api, {
+        const res = yield call(api, {
             query
         })
-        if (!data.errors)
+        console.log({ res });
+        const { data } = res;
+        if (!data.errors) {
             yield put({
                 type: SET_USER_DATA,
                 payload: data.data.customerLogin
             })
+            successCallback()
+        }
         else
             callbackError(data.errors.join('|'))
 
     } catch (e) {
         console.log('Error callLogin', e);
+        callbackError(data.errors.join('|'));
     }
 }
 

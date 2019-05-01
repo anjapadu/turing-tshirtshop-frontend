@@ -24,7 +24,8 @@ class Register extends PureComponent {
             errorLastname: false,
             errorEmail: false,
             errorPassword: false,
-            errorMessage: false
+            errorMessage: false,
+            isLoading: false
         }
     }
     _onChangeInput(key, value) {
@@ -90,16 +91,21 @@ class Register extends PureComponent {
                 errorPassword: true
             })
         }
-        this.props.register({
-            password,
-            email,
-            firstname,
-            lastname,
-            callbackError: (errorMessage) => {
-                return this.setState({
-                    errorMessage
-                })
-            }
+        this.setState({
+            isLoading: true
+        }, () => {
+            this.props.register({
+                password,
+                email,
+                firstname,
+                lastname,
+                callbackError: (errorMessage) => {
+                    return this.setState({
+                        errorMessage,
+                        isLoading: false
+                    })
+                }
+            })
         })
     }
     render() {
@@ -108,7 +114,8 @@ class Register extends PureComponent {
             repeatPassword,
             firstname,
             lastname,
-            email
+            email,
+            isLoading
         } = this.state;
         return <React.Fragment>
             <Form>
@@ -190,15 +197,15 @@ class Register extends PureComponent {
                     >
                         <Button
                             isLarge
-                            // className={"form-responsive-button"}
+                            disabled={isLoading}
                             onClick={() => this.props.push('/login')}
                             color={"green"}
                             text={"I've an account"}
                         />
                         <Button
                             onClick={this._onSubmit.bind(this)}
-                            // className={"form-responsive-button"}
                             isLarge
+                            isLoading={isLoading}
                             text={"Register"}
                         />
                     </Col>

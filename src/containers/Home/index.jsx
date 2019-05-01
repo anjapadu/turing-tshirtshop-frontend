@@ -70,7 +70,8 @@ class Home extends PureComponent {
     }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, props) => {
+    console.log({ props })
     const {
         productList,
         productsCount,

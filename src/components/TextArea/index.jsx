@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 
 
-class Input extends PureComponent {
+class TextArea extends PureComponent {
     _onChange() {
 
     }
@@ -41,4 +41,4 @@ class Input extends PureComponent {
     }
 }
 
-export default Input;
+export default TextArea;

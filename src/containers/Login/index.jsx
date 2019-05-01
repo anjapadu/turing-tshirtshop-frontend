@@ -22,7 +22,8 @@ class Login extends PureComponent {
             password: '',
             errorUser: false,
             errorPassword: false,
-            errorMessage: false
+            errorMessage: false,
+            isLoading: false
         }
     }
     _onChangePassword(password) {
@@ -31,6 +32,7 @@ class Login extends PureComponent {
         })
     }
     _onSubmit() {
+
         this._resetErrors();
         let errors = 0;
         const { email } = this.props;
@@ -45,12 +47,22 @@ class Login extends PureComponent {
                 errorPassword: true
             })
         }
-        this.props.login({
-            password, callbackError: (errorMessage) => {
-                return this.setState({
-                    errorMessage
+
+        this.setState({
+            isLoading: true
+        }, () => {
+            this.props.login({
+                password,
+                callbackError: (errorMessage) => {
+                    return this.setState({
+                        errorMessage,
+                        isLoading: false
+                    })
+                },
+                successCallback: () => this.setState({
+                    isLoading: false
                 })
-            }
+            })
         })
     }
     _resetErrors() {
@@ -81,6 +93,7 @@ class Login extends PureComponent {
             }
             return <small className={"has-text-danger"}>{text}</small>
         }
+        return false;
 
     }
     responseGoogle(response) {
@@ -162,11 +175,6 @@ class Login extends PureComponent {
                         {this._renderErrorMessage()}
                     </Col>
                 </Row>
-                {/* <Row>
-                    <Col>
-                        {this._renderErrorMessage()}
-                    </Col>
-                </Row> */}
                 <Row>
                     <Col
                         isResponsiveReverse
@@ -178,6 +186,7 @@ class Login extends PureComponent {
                                 width: '100%'
                             }}
                             isFluid
+                            isLoading={this.state.isLoading}
                             isLarge
                             text={"Log In"}
                         />
@@ -188,6 +197,7 @@ class Login extends PureComponent {
                         isResponsiveReverse
                     >
                         <Button
+                            disabled={this.state.isLoading}
                             style={{
                                 width: '100%'
                             }}
@@ -201,20 +211,11 @@ class Login extends PureComponent {
                 <Row>
                     <Col>
                         <GoogleLogin
+                            disabled={this.state.isLoading}
                             className={"google-login-btn"}
                             clientId="504841747662-7gjnq7un2akeq3k7ttjroiblbp3d9o97.apps.googleusercontent.com"
                             buttonText="Continue with Google"
-                            // render={renderProps => (
-                            //     <button
-                            //         style={{
-                            //             width: '100%',
 
-                            //         }}
-                            //         className={"button is-large"}
-                            //         onClick={renderProps.onClick}
-                            //         disabled={renderProps.disabled}
-                            //     >This is my custom Google button</button>
-                            // )}
                             style={{
                                 background: 'red'
                             }}
@@ -238,6 +239,9 @@ const mapStateToProps = (state) => {
     }
 }
 
+export {
+    Login
+}
 export default connect(mapStateToProps, {
     push,
     login,

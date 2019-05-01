@@ -4,7 +4,7 @@ import {
 } from 'react-redux';
 import {
 	PersistGate
-} from 'redux-persist/integration/react'
+} from 'redux-persist/integration/react';
 import './styles.scss';
 import './utils'
 import configureStore from './store';

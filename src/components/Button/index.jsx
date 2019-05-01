@@ -12,7 +12,8 @@ class Button extends PureComponent {
         }
     }
     _onClick() {
-        this.props.onClick && this.props.onClick();
+        if (!this.props.disabled)
+            this.props.onClick && this.props.onClick();
     }
     render() {
         return <a
@@ -20,6 +21,7 @@ class Button extends PureComponent {
             onClick={this._onClick.bind(this)}
             className={`
             button
+            ${this.props.isLoading ? ' is-loading' : ''}
             ${this.props.isLarge ? ' is-large' : ''}
             ${this.renderColor()}
             ${this.props.className ? ` ${this.props.className}` : ''}`}

@@ -21,9 +21,7 @@ describe("Button component", () => {
         />);
         const rootInstance = component.root;
         const a = rootInstance.findByType("a");
-        console.log({ a: a.props });
         expect(a.props.children).toBe("ButtonName");
-        // expect(a.props)
     });
     // test("It ")
 
