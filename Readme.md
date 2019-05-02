@@ -5,6 +5,7 @@
 
 Hosted on AWS EC2  +  RDS
            
+
 ----
 ## Installation
 ```bash
@@ -18,4 +19,9 @@ $ yarn  start
 ## Generate production files
 ```bash
 $ yarn build
+```
+
+## Run Production
+```bash
+$ cd dist/ && yarn install && yarn production start
 ```

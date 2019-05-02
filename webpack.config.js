@@ -1,5 +1,6 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 let plugins;
+const path = require('path');
 
 module.exports = env => {
   if (env.production) {
@@ -17,6 +18,7 @@ module.exports = env => {
     },
 
     output: {
+      path: path.resolve(__dirname, "dist/public"),
       publicPath: '/',
       filename: env.production ? "[name].[contenthash].bundle.js" : "[name].bundle.js",
       chunkFilename: env.production ? "[name].[contenthash].chunk.js" : "[name].chunk.js"
