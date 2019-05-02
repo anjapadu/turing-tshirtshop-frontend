@@ -23,12 +23,14 @@ $navbar-height: 5rem;
 $steps-completed-color: $red;
 $steps-active-color: $red;
 $steps-marker-default-border: 0.2em solid $lightergray;
+$input-range-primary-color: $red;
 @import "bulma";
 
 @import "bulma-pageloader/dist/css/bulma-pageloader.sass";
 @import "bulma-divider/dist/css/bulma-divider.sass";
 @import "bulma-steps/dist/css/bulma-steps.sass";
 @import "react-credit-cards/lib/styles.scss";
+@import "react-input-range/src/scss/index.scss";
 /**
  * Steps override
 */

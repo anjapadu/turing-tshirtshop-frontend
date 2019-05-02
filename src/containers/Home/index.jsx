@@ -8,9 +8,14 @@ import Col from '../../components/Col';
 import { productsSelector } from '../../selectors/products';
 import {
     fetchProductPage,
+    setSelectedColor,
+    setSelectedPrice,
+    setSelectedSize
 } from '../../actions'
 import Loader from '../../components/Loader';
 import Pagination from '../../components/Pagination';
+import { filtersSelectors } from '../../selectors/app';
+import Icon from '../../components/Icon';
 
 class Home extends PureComponent {
     _renderProducts() {
@@ -50,11 +55,60 @@ class Home extends PureComponent {
                                 width: '100%'
                             }}
                         >
-                                <Pagination
+                                {this.props.isActiveFilters && <div
+                                    style={{
+                                        marginLeft: 20,
+                                        marginBottom: 20
+                                    }}
+                                >
+                                    <h3
+                                        className={"has-text-danger"}
+                                    >Filters:</h3>
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            flexDirection: 'row',
+
+                                        }}
+                                    >
+                                        {this.props.selectedColor && <div
+                                            className={"filter-helper"}
+                                        >
+                                            {this.props.selectedColor}
+                                            <Icon
+                                                icon="fa-times"
+                                                onClick={() => this.props.setSelectedColor(null)}
+                                            />
+                                        </div>}
+                                        {this.props.selectedSize && <div
+                                            className={"filter-helper"}
+                                        >
+                                            {this.props.selectedSize}
+                                            <Icon
+                                                icon="fa-times"
+                                                onClick={() => this.props.setSelectedSize(null)}
+                                            />
+                                        </div>}
+                                        {this.props.selectedPriceMin && <div
+                                            className={"filter-helper"}
+                                        >
+                                            {`$${this.props.selectedPriceMin}.00 - $${this.props.selectedPriceMax}.00`}
+                                            <Icon
+                                                icon="fa-times"
+                                                onClick={() => this.props.setSelectedPrice({
+                                                    min: null,
+                                                    max: null
+                                                })}
+                                            />
+                                        </div>}
+
+                                    </div>
+                                </div>}
+                                {productsCount > 0 && < Pagination
                                     page={selectedPage}
                                     onChangePage={this.props.fetchProductPage}
                                     pages={Math.ceil(productsCount / 12)}
-                                />
+                                />}
                                 <br />
                                 <div
                                     className={"products-container"}
@@ -71,23 +125,39 @@ class Home extends PureComponent {
 }
 
 const mapStateToProps = (state, props) => {
-    console.log({ props })
+    // console.log({ props })
     const {
         productList,
         productsCount,
         isLoadingProducts,
         selectedPage
     } = productsSelector(state);
+
+    const {
+        selectedPriceMin,
+        selectedPriceMax,
+        selectedSize,
+        selectedColor,
+        isActiveFilters
+    } = filtersSelectors(state);
+
     return {
         isLoadingProducts,
         productList,
         productsCount,
         selectedPage,
-
+        isActiveFilters,
+        selectedPriceMin,
+        selectedPriceMax,
+        selectedSize,
+        selectedColor
     }
 }
 
 export default connect(mapStateToProps, {
     fetchProductPage,
+    setSelectedColor,
+    setSelectedPrice,
+    setSelectedSize,
     push
 })(Home);

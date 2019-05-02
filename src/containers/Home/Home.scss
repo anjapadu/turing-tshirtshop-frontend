@@ -13,4 +13,12 @@
     flex-direction: row;
     flex-wrap: wrap;
   }
+
+  .filter-helper {
+    border: solid 1px $red;
+    font-family: "Montserrat";
+    padding: 5px 10px;
+    color: $red;
+    margin-right: 10px;
+  }
 }

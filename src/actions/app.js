@@ -5,7 +5,11 @@ import {
     SET_SHOW_CART,
     SET_AUTOCOMPLETE,
     FETCH_AUTOCOMPLETE,
-    SIGN_OUT
+    SIGN_OUT,
+    SET_CUSTOM_APP,
+    SET_SELECTED_SIZE,
+    SET_SELECTED_COLOR,
+    SET_SELECTED_PRICE
 } from '../constants';
 
 export const setIsLoading = (payload) => ({
@@ -37,4 +41,22 @@ export const fetchAutoComplete = () => ({
 
 export const signOut = () => ({
     type: SIGN_OUT
+})
+
+export const setCustomAppReducer = (payload) => ({
+    type: SET_CUSTOM_APP,
+    payload
+})
+
+export const setSelectedSize = (payload) => ({
+    type: SET_SELECTED_SIZE,
+    payload
+})
+export const setSelectedColor = (payload) => ({
+    type: SET_SELECTED_COLOR,
+    payload
+})
+export const setSelectedPrice = (payload) => ({
+    type: SET_SELECTED_PRICE,
+    payload
 })

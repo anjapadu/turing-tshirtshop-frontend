@@ -25,9 +25,17 @@
       }
       &.is-category {
         background: none;
-        border: solid 2px $darkpink;
+        border: solid 2px $darkgray;
+
         a {
-          color: $darkpink !important;
+          color: $darkgray !important;
+        }
+        &.selected-department {
+          border: solid 2px $darkpink;
+          border-left: solid 5px $darkpink;
+          a {
+            color: $darkpink !important;
+          }
         }
         &.is-selected {
           background: $darkpink;

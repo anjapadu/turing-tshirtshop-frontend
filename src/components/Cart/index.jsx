@@ -7,11 +7,13 @@ import Icon from '../Icon';
 import Divider from '../Divider';
 import {
     setShowCart,
-    removeCartItem
+    removeCartItem,
+    changeProductQuantity
 } from '../../actions';
+import QuantityPicker from '../QuantityPicker';
 
 
-const ItemCart = ({ thumbnail, name, selectedColor, selectedSize, price, discounted_price, quantity, removeCartItem, productKey }) => {
+const ItemCart = ({ thumbnail, name, selectedColor, selectedSize, price, discounted_price, quantity, removeCartItem, productKey, _onChangeQuantity }) => {
     let _price = (price * (quantity || 1)).toFixed(2);
     let _discounted_price = (discounted_price * (quantity || 1)).toFixed(2)
     return <div
@@ -41,6 +43,12 @@ const ItemCart = ({ thumbnail, name, selectedColor, selectedSize, price, discoun
                 >{selectedSize}
                 </span>
             </p>
+            <QuantityPicker
+                onChange={(value) => _onChangeQuantity(productKey, value)}
+                value={quantity || 1}
+                isXSmall
+            />
+            <br />
             <Button
                 onClick={() => removeCartItem(productKey)}
                 className={"is-danger is-rounded is-small not-responsive"}
@@ -61,6 +69,7 @@ const ItemCart = ({ thumbnail, name, selectedColor, selectedSize, price, discoun
                 className={"old-price"}
             >$ {_price}</span>}
             $ {discounted_price !== 0 ? _discounted_price : _price}
+
         </div>
 
     </div>
@@ -84,6 +93,7 @@ class Cart extends PureComponent {
     _renderItems() {
         return Object.keys(this.props.cartItemsNow).map((cartItemKey, index) => {
             return <ItemCart
+                _onChangeQuantity={this._onChangeQuantity.bind(this)}
                 key={`_${index}`}
                 {...this.props.cartItemsNow[cartItemKey]}
                 removeCartItem={this.props.removeCartItem}
@@ -102,6 +112,12 @@ class Cart extends PureComponent {
     _onCheckout() {
         this._onCloseCart();
         this.props.push('/checkout');
+    }
+    _onChangeQuantity(key, value) {
+        this.props.changeProductQuantity({
+            productKey: key,
+            value
+        })
     }
     render() {
         const {
@@ -194,11 +210,11 @@ const mapStateToProps = (state) => {
         cartItemsNowCount,
         subTotalCart
     }
-
 }
 
 export default connect(mapStateToProps, {
     setShowCart,
     removeCartItem,
+    changeProductQuantity,
     push
 })(Cart);

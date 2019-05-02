@@ -36,26 +36,26 @@ export default class QuantityPicker extends React.PureComponent {
     }
     render() {
         const { value } = this.state;
-        const { isSmall } = this.props;
+        const { isSmall, isXSmall } = this.props;
         return <div
             className={`quantity-picker`}
         >
             <div
                 onClick={(this.props.value || value) > 1 ? this._onChangeValue.bind(this, -1) : null}
-                className={`_button${(this.props.value || value) <= 1 ? ' disabled' : ''}${isSmall ? ' small' : ''}`}
+                className={`_button${(this.props.value || value) <= 1 ? ' disabled' : ''}${isSmall ? ' small' : isXSmall ? ' xsmall' : ''}`}
             >
                 <Icon
                     icon={"fa-minus"}
                 />
             </div>
             <input
-                className={`${isSmall ? 'small' : ''}`}
+                className={`${isSmall ? 'small' : isXSmall ? ' xsmall' : ''}`}
                 onChange={this._onChange.bind(this)}
                 value={this.props.value || value}
             />
             <div
                 onClick={this._onChangeValue.bind(this, 1)}
-                className={`_button${isSmall ? ' small' : ''}`}
+                className={`_button${isSmall ? ' small' : isXSmall ? ' xsmall' : ''}`}
             // onClick={}
             >
                 <Icon

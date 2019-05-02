@@ -2,7 +2,9 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  flex-wrap: wrap;
   .size-item {
+    margin-top: 10px;
     width: 4.5rem;
     margin-right: 10px;
     padding: 0.5rem 1rem;

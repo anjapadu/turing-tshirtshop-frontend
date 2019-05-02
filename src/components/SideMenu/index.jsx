@@ -1,33 +1,45 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { appSelector } from '../../selectors/app';
+import { appSelector, maxMinSelector, filtersSelectors } from '../../selectors/app';
 import Input from '../Input';
 import Divider from '../Divider';
 import {
     setCategory,
     setDepartment,
     setAutoComplete,
+    setSelectedPrice,
+    setSelectedColor,
+    setSelectedSize,
     fetchAutoComplete
 } from '../../actions';
+import ColorPicker from '../ColorPicker';
+import SizePicker from '../SizePicker';
+import InputRange from 'react-input-range';
 
 class SideMenu extends React.PureComponent {
+    state = {
+        price: {
+            min: this.props.minPrice,
+            max: this.props.maxPrice
+        }
+    }
     _onSelectDepartment(id, index) {
         const { selectedDepartment } = this.props;
-        if (!selectedDepartment || selectedDepartment.id != id)
-            return this.props.setDepartment({ id, index })
+        if (!selectedDepartment || selectedDepartment != id)
+            return this.props.setDepartment(id)
         this.props.setDepartment(null)
     }
-    _onSelectCategory(id, index) {
+    _onSelectCategory(id, departmentId) {
         const { selectedCategory } = this.props;
-        if (!selectedCategory || selectedCategory.id != id)
-            return this.props.setCategory({ id, index })
-        this.props.setCategory(null)
+        if (!selectedCategory || selectedCategory != id)
+            return this.props.setCategory({ id, departmentId })
+        this.props.setCategory({ id: null, departmentId })
     }
     _renderDepartments() {
         const { selectedDepartment, departmentsCategories } = this.props;
         return departmentsCategories.map((department, index) => {
             return <li
-                className={selectedDepartment && selectedDepartment.id === department.id ? 'is-selected' : ''}
+                className={selectedDepartment && selectedDepartment == department.id ? 'is-selected' : ''}
                 key={`_${index}`}
                 onClick={this._onSelectDepartment.bind(this, department.id, index)}
             >
@@ -38,17 +50,18 @@ class SideMenu extends React.PureComponent {
     _renderCategories() {
         const {
             selectedCategory,
-            departmentsCategories,
+            categories,
             selectedDepartment
         } = this.props;
-        return departmentsCategories[selectedDepartment.index].categories.map((category, index) => {
+        return categories.map((category, index) => {
             return <li
                 className={`
                     is-category
-                    ${selectedCategory && selectedCategory.id === category.id ? ' is-selected' : ''}
+                    ${selectedDepartment && selectedDepartment == category.departmentId ? ' selected-department' : ''}
+                    ${selectedCategory && selectedCategory == category.id ? ' is-selected' : ''}
                 `}
                 key={`_${index}`}
-                onClick={this._onSelectCategory.bind(this, category.id, index)}
+                onClick={this._onSelectCategory.bind(this, category.id, category.departmentId)}
             >
                 <a>{category.name}</a>
             </li>
@@ -60,10 +73,24 @@ class SideMenu extends React.PureComponent {
             this.props.fetchAutoComplete()
         }
     }
+    _onPickColor(value) {
+        this.props.setSelectedColor(value)
+    }
+    _onPickSize(value) {
+        this.props.setSelectedSize(value)
+    }
+    _onChangeComplete({ min, max }) {
+        this.props.setSelectedPrice({
+            min,
+            max
+        })
+    }
     render() {
         const {
-            selectedDepartment,
-            autoComplete
+            attributes,
+            autoComplete,
+            maxPrice,
+            minPrice
         } = this.props;
         return <aside className="left-menu">
             <Input
@@ -72,18 +99,69 @@ class SideMenu extends React.PureComponent {
                 icon={"fa-search"}
                 placeholder={"Search a product"}
             />
+
             <Divider
-                content={"Pick a department"}
+                content={"Departments"}
             />
             <ul>
                 {this._renderDepartments()}
             </ul>
-            {selectedDepartment && <Divider
-                content={"Pick a category"}
-            />}
-            {selectedDepartment && <ul>
+            <Divider
+                content={"Categories"}
+            />
+            <ul>
                 {this._renderCategories()}
-            </ul>}
+            </ul>
+            <Divider
+                content={"Other filters"}
+            />
+            <small
+                style={{
+                    fontFamily: 'Montserrat'
+                }}
+            >Choose a color:</small>
+            <ColorPicker
+                controlled
+                style={{
+                    background: '#f7f7f7',
+                    marginTop: 10
+                }}
+                colors={attributes["color"]}
+                hasNoneSelector
+                onPickColor={this._onPickColor.bind(this)}
+                value={this.props.selectedColor}
+            />
+            <br />
+            <small
+                style={{
+                    fontFamily: 'Montserrat'
+                }}
+            >Choose a Size:</small>
+            <SizePicker
+                controlled
+                value={this.props.selectedSize}
+                onPickSize={this._onPickSize.bind(this)}
+                hasNoneSelector
+                sizes={attributes["size"]}
+            />
+            <br />
+            <small
+                style={{
+                    fontFamily: 'Montserrat'
+                }}
+            >Price range:</small>
+            <br />
+            <br />
+            <InputRange
+                maxValue={maxPrice}
+                minValue={minPrice}
+                formatLabel={value => `$${value}`}
+                value={this.state.price}
+                onChange={value => this.setState({ price: value })}
+                onChangeComplete={this._onChangeComplete.bind(this)} />
+            <br />
+            <br />
+            <br />
         </aside >
     }
 }
@@ -94,13 +172,33 @@ const mapStateToProps = (state) => {
         departmentsCategories,
         selectedCategory,
         selectedDepartment,
-        autoComplete
+        categories,
+        autoComplete,
+        attributes
     } = appSelector(state);
+    const {
+        maxPrice,
+        minPrice
+    } = maxMinSelector(state)
+    const {
+        selectedColor,
+        selectedSize,
+        selectedPriceMax,
+        selectedPriceMin
+    } = filtersSelectors(state)
     return {
         autoComplete,
         departmentsCategories,
         selectedCategory,
-        selectedDepartment
+        categories,
+        selectedDepartment,
+        attributes,
+        maxPrice,
+        minPrice,
+        selectedColor,
+        selectedSize,
+        selectedPriceMax,
+        selectedPriceMin
     }
 }
 
@@ -108,5 +206,8 @@ export default connect(mapStateToProps, {
     setCategory,
     setDepartment,
     setAutoComplete,
-    fetchAutoComplete
+    fetchAutoComplete,
+    setSelectedPrice,
+    setSelectedColor,
+    setSelectedSize,
 })(SideMenu)
