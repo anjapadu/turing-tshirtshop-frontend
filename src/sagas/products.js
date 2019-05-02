@@ -56,7 +56,7 @@ export function* callFetchProducts({ payload } = {}) {
               size: ${size ? `"${size}"` : null}
               minPrice: ${minPrice || null}
               maxPrice: ${maxPrice || null}
-              autoComplete: ${autoComplete ? `"${autoComplete}"` : null} 
+              autoComplete: ${(autoComplete && autoComplete.trim() !== '') ? `"${autoComplete}"` : null} 
             ){
                 data{
                     id
@@ -119,7 +119,7 @@ function* callFetchOnPaging({ payload }) {
         selectedColor,
         selectedSize,
         selectedPriceMin,
-        selectedPriceMax
+        selectedPriceMax,
     } = state.app;
     yield call(callFetchProducts, {
         payload: {
@@ -151,7 +151,10 @@ function* callFetchOnFilter({ type, payload }) {
         selectedColor,
         selectedPriceMax,
         selectedPriceMin,
-        selectedSize
+        selectedSize,
+        selectedDepartment,
+        selectedCategory,
+        autoComplete
     } = state.app;
     switch (type) {
         case SET_SELECTED_DEPARTMENT:
@@ -161,7 +164,8 @@ function* callFetchOnFilter({ type, payload }) {
                     minPrice: selectedPriceMin,
                     maxPrice: selectedPriceMax,
                     color: selectedColor,
-                    size: selectedSize
+                    size: selectedSize,
+                    autoComplete
                 }
             });
             break;
@@ -181,7 +185,8 @@ function* callFetchOnFilter({ type, payload }) {
                     minPrice: selectedPriceMin,
                     maxPrice: selectedPriceMax,
                     color: selectedColor,
-                    size: selectedSize
+                    size: selectedSize,
+                    autoComplete
                 }
             });
             break;
@@ -190,12 +195,13 @@ function* callFetchOnFilter({ type, payload }) {
         case SET_SELECTED_PRICE:
             yield call(callFetchProducts, {
                 payload: {
-                    departmentId,
-                    categoryId: id,
+                    departmentId: selectedDepartment || null,
+                    categoryId: selectedCategory || null,
                     minPrice: selectedPriceMin,
                     maxPrice: selectedPriceMax,
                     color: selectedColor,
-                    size: selectedSize
+                    size: selectedSize,
+                    autoComplete
                 }
             });
             break;
